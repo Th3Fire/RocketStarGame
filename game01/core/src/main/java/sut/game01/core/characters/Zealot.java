@@ -1,5 +1,7 @@
 package sut.game01.core.characters;
 
+import playn.core.Key;
+import playn.core.Keyboard;
 import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.Layer;
@@ -13,7 +15,7 @@ public class Zealot {
     private boolean hasLoaded = false;
 
     public enum State {
-        IDLE, RUN, ATK
+        IDLE, LEFT, RIGHT
     };
 
     private State state = State.IDLE;
@@ -22,6 +24,26 @@ public class Zealot {
     private int offset = 0; //chang Here
 
     public Zealot(final  float x, final float y){
+
+        PlayN.keyboard().setListener((new Keyboard.Adapter(){
+            @Override
+            public void onKeyUp(Keyboard.Event event) {
+                if(event.key() == Key.LEFT){
+
+                        state = State.LEFT;
+                        //case LEFT:state = State.ATK; break;
+                        //case ATK:state = State.IDLE; break;
+
+                }else if(event.key() == Key.RIGHT){
+                        state = State.RIGHT;
+
+                }else if(event.key() == Key.UP){
+                        state = State.IDLE;
+                }
+            }
+        }));
+
+
         sprite = SpriteLoader.getSprite("images/zealot.json");
         sprite.addCallback(new Callback<Sprite>() {
             @Override
@@ -47,6 +69,14 @@ public class Zealot {
 
         e = e + detal;
         if(e > 150) {
+
+            switch (state){
+                case IDLE: offset = 0; break;
+                case LEFT: offset = 4; break;
+                case RIGHT: offset = 8; break;
+
+            }
+
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
             e = 0;
