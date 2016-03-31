@@ -28,7 +28,7 @@ public class TestScreen extends Screen{
         ImageLayer bg = PlayN.graphics().createImageLayer(bgImage);
         this.layer.add(bg);
 
-        z = new Zealot(200f,200f);
+        z = new Zealot(340f,430f);
         this.layer.add(z.layer());
 
 
