@@ -15,7 +15,7 @@ public class Zealot {
     private boolean hasLoaded = false;
 
     public enum State {
-        IDLE, LEFT, RIGHT
+        IDLE, Go, RIGHT
     };
 
     private State state = State.IDLE;
@@ -28,16 +28,16 @@ public class Zealot {
         PlayN.keyboard().setListener((new Keyboard.Adapter(){
             @Override
             public void onKeyUp(Keyboard.Event event) {
-                if(event.key() == Key.LEFT){
+                if(event.key() == Key.UP){
 
-                        state = State.LEFT;
+                        state = State.Go;
                         //case LEFT:state = State.ATK; break;
                         //case ATK:state = State.IDLE; break;
 
                 }else if(event.key() == Key.RIGHT){
                         state = State.RIGHT;
 
-                }else if(event.key() == Key.UP){
+                }else if(event.key() == Key.SPACE){
                         state = State.IDLE;
                 }
             }
@@ -72,7 +72,7 @@ public class Zealot {
 
             switch (state){
                 case IDLE: offset = 0; break;
-                case LEFT: offset = 4; break;
+                case Go: offset = 4; break;
                 case RIGHT: offset = 8; break;
 
             }
