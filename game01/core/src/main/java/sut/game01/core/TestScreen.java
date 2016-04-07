@@ -35,12 +35,12 @@ public class TestScreen extends Screen{
 
         Image shield = assets().getImage("images/shield.png");
         ImageLayer shieldP = PlayN.graphics().createImageLayer(shield);
-        shieldP.setTranslation(225,1);
+        shieldP.setTranslation(240,1);
         this.layer.add(shieldP);
 
         Image coins = assets().getImage("images/coins.png");
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
-        coinsP.setTranslation(440,1);
+        coinsP.setTranslation(460,1);
         this.layer.add(coinsP);
 
 
