@@ -43,6 +43,11 @@ public class TestScreen extends Screen{
         coinsP.setTranslation(460,1);
         this.layer.add(coinsP);
 
+        Image lvps = assets().getImage("images/levelps.png");
+        ImageLayer lvpsP = PlayN.graphics().createImageLayer(lvps);
+        lvpsP.setTranslation(1,50);
+        this.layer.add(lvpsP);
+
 
         z = new Zealot(300f,430f);
         this.layer.add(z.layer());
