@@ -6,6 +6,7 @@ import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.Layer;
 import sut.game01.core.sprite.*;
+import tripleplay.game.ScreenStack;
 /**
  * Created by Administrator on 30/3/2559.
  */
@@ -14,12 +15,12 @@ public class Zealot {
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
 
+
     public enum State {
         IDLE, Go, RIGHT
     };
 
     private State state = State.IDLE;
-
     private int e = 0;
     private int offset = 0; //chang Here
 
@@ -28,21 +29,25 @@ public class Zealot {
         PlayN.keyboard().setListener((new Keyboard.Adapter(){
             @Override
             public void onKeyUp(Keyboard.Event event) {
-                if(event.key() == Key.UP){
+                if(event.key() == Key.SPACE){
 
-                        state = State.Go;
-                        //case LEFT:state = State.ATK; break;
-                        //case ATK:state = State.IDLE; break;
+                        //state = State.Go;
+                        switch (state) {
+                            case IDLE:state = State.Go; break;
+                            case Go:state = State.IDLE; break;
+                        }
 
-                }else if(event.key() == Key.RIGHT){
-                        state = State.RIGHT;
+                }else if(event.key() == Key.ESCAPE){
+                        //
+                        // state = State.RIGHT;
+
+
 
                 }else if(event.key() == Key.SPACE){
                         state = State.IDLE;
                 }
             }
         }));
-
 
         sprite = SpriteLoader.getSprite("images/zealot.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -53,7 +58,6 @@ public class Zealot {
                 sprite.layer().setTranslation(x,y +13f);
                 hasLoaded = true;
             }
-
             @Override
             public void onFailure(Throwable cause) {
                 PlayN.log().error("Error loading image!",cause);
@@ -76,7 +80,6 @@ public class Zealot {
                 case RIGHT: offset = 8; break;
 
             }
-
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
             e = 0;

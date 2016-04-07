@@ -18,7 +18,9 @@ public class MyGame extends Game.Default {
   @Override
   public void init() {
     // create and add background image layer
-      ss.push(new TestScreen(ss));
+
+
+      ss.push(new HomeGame(ss));
 
   }
 

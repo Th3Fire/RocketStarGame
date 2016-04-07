@@ -10,6 +10,9 @@ import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 import playn.core.PlayN;
 import static playn.core.PlayN.*;
+import playn.core.Key;
+import playn.core.Keyboard;
+import playn.core.Mouse;
 
 
 public class TestScreen extends Screen{
@@ -35,18 +38,40 @@ public class TestScreen extends Screen{
 
         Image shield = assets().getImage("images/shield.png");
         ImageLayer shieldP = PlayN.graphics().createImageLayer(shield);
-        shieldP.setTranslation(240,1);
+        shieldP.setTranslation(215,1);
         this.layer.add(shieldP);
 
         Image coins = assets().getImage("images/coins.png");
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
-        coinsP.setTranslation(460,1);
+        coinsP.setTranslation(410,1);
         this.layer.add(coinsP);
 
         Image lvps = assets().getImage("images/levelps.png");
         ImageLayer lvpsP = PlayN.graphics().createImageLayer(lvps);
         lvpsP.setTranslation(1,50);
         this.layer.add(lvpsP);
+
+        Image pause_bt = assets().getImage("images/pause_bt.png");
+        ImageLayer pauseBt = PlayN.graphics().createImageLayer(pause_bt);
+        pauseBt.setTranslation(590,1);
+        this.layer.add(pauseBt);
+
+        Image pause_dialog = assets().getImage("images/pause_bt.png");
+        ImageLayer pauseDialog = PlayN.graphics().createImageLayer(pause_dialog);
+        pauseDialog.setTranslation(400,200);
+
+
+        pauseBt.addListener(new Mouse.LayerAdapter() {
+
+            @Override
+            public void onMouseUp(Mouse.ButtonEvent event) {
+
+
+
+            }
+
+
+        });
 
 
         z = new Zealot(300f,430f);
