@@ -6,11 +6,15 @@ package sut.game01.core;
 import static playn.core.PlayN.*;
 import playn.core.Image;
 import playn.core.ImageLayer;
+import playn.core.Keyboard;
 import playn.core.Mouse;
+import playn.core.Key;
+import playn.core.Keyboard;
 
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 import tripleplay.ui.*;
+
 
 public class HomeGame extends Screen{
 
@@ -25,6 +29,7 @@ public class HomeGame extends Screen{
 
     private final LevelSelect lvselect;
     private final GameOver gameover;
+    private final TestScreen test;
     private final ScreenStack ss;
 
     public HomeGame (final ScreenStack ss){
@@ -33,6 +38,7 @@ public class HomeGame extends Screen{
         this.ss = ss;
         this.lvselect = new LevelSelect(ss);
         this.gameover = new GameOver(ss);
+        this.test = new TestScreen(ss);
 
         Image bgImage = assets().getImage("images/bgHome.png");
         this.bg = graphics().createImageLayer(bgImage);
@@ -75,6 +81,17 @@ public class HomeGame extends Screen{
 
 
         });
+
+        keyboard().setListener(new Keyboard.Adapter(){
+            @Override
+            public void onKeyUp(Keyboard.Event event) {
+                if(event.key() == Key.ENTER ){
+                    ss.push(test);
+                }
+            }
+        });
+
+
 
         gameovertest.addListener(new Mouse.LayerAdapter() {
 
