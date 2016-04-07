@@ -24,11 +24,27 @@ public class TestScreen extends Screen{
         super.wasShown();
 
 
-        Image bgImage = assets().getImage("images/bg.png");
+        Image bgImage = assets().getImage("images/bgGameplay2.png");
         ImageLayer bg = PlayN.graphics().createImageLayer(bgImage);
         this.layer.add(bg);
 
-        z = new Zealot(340f,430f);
+        Image life = assets().getImage("images/life.png");
+        ImageLayer liftP = PlayN.graphics().createImageLayer(life);
+        liftP.setTranslation(10,1);
+        this.layer.add(liftP);
+
+        Image shield = assets().getImage("images/shield.png");
+        ImageLayer shieldP = PlayN.graphics().createImageLayer(shield);
+        shieldP.setTranslation(225,1);
+        this.layer.add(shieldP);
+
+        Image coins = assets().getImage("images/coins.png");
+        ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
+        coinsP.setTranslation(440,1);
+        this.layer.add(coinsP);
+
+
+        z = new Zealot(300f,430f);
         this.layer.add(z.layer());
 
 
