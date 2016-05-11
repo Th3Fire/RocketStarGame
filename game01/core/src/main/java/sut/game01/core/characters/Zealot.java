@@ -98,7 +98,7 @@ public class Zealot {
         fixtureDef.restitution = 0.35f;
         body.createFixture(fixtureDef);
 
-        body.createFixture(fixtureDef);
+       // body.createFixture(fixtureDef);
 
         body.setLinearDamping(0.2f);
         body.setTransform(new Vec2(x, y), 0f);
