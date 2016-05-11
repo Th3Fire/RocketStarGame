@@ -1,8 +1,6 @@
 package sut.game01.core;
 
-import playn.core.Image;
-import playn.core.ImageLayer;
-import playn.core.PlayN;
+import playn.core.*;
 import sut.game01.core.characters.Zealot;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
@@ -43,8 +41,24 @@ public class GameplayScreen extends Screen{
         coinsP.setTranslation(440,1);
         this.layer.add(coinsP);
 
+        PlayN.keyboard().setListener((new Keyboard.Adapter(){
+            @Override
+            public void onKeyUp(Keyboard.Event event) {
+                if(event.key() == Key.UP){
+                    //z.state = Zealot.State.Go;
 
-        z = new Zealot(300f,430f);
+                }else if(event.key() == Key.RIGHT){
+                    //z.state = Zealot.State.RIGHT;
+                   // z.x = z.x - 1f;
+
+                }else if(event.key() == Key.LEFT){
+                    //z.state = Zealot.State.IDLE;
+                }
+            }
+        }));
+
+
+        //z = new Zealot(,300f,430f);
         this.layer.add(z.layer());
 
 

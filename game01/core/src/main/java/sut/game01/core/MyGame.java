@@ -19,8 +19,8 @@ public class MyGame extends Game.Default {
   public void init() {
     // create and add background image layer
 
+      ss.push(new GraGame(ss));
 
-      ss.push(new HomeGame(ss));
 
   }
 
