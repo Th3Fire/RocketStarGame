@@ -3,14 +3,13 @@ package sut.game01.core;
 /**
  * Created by Wuttinunt on 27/03/2016.
  */
-import static playn.core.PlayN.*;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.Mouse;
-
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
-import tripleplay.ui.*;
+
+import static playn.core.PlayN.*;
 
 public class LevelSelect extends  Screen{
 
@@ -32,12 +31,14 @@ public class LevelSelect extends  Screen{
     private final Store store;
 
     private final ScreenStack ss;
+    private final GameplayScreen gameplayScreen;
 
 
 
     public LevelSelect (final ScreenStack ss){
         this.ss = ss;
         this.store = new Store(ss);
+        this.gameplayScreen = new GameplayScreen(ss);
 
 
         Image bgImage = assets().getImage("images/bgHome.png");
@@ -90,7 +91,7 @@ public class LevelSelect extends  Screen{
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
 
-                ss.push(store);
+                ss.push(new Store(ss));
 
             }
 
@@ -103,6 +104,18 @@ public class LevelSelect extends  Screen{
             public void onMouseUp(Mouse.ButtonEvent event) {
 
                 ss.remove(ss.top());
+
+            }
+
+
+        });
+
+        lv1_bt.addListener(new Mouse.LayerAdapter() {
+
+            @Override
+            public void onMouseUp(Mouse.ButtonEvent event) {
+
+                ss.push(new GameplayScreen(ss));
 
             }
 
@@ -123,6 +136,8 @@ public class LevelSelect extends  Screen{
         this.layer.add(lv1_bt);
         this.layer.add(lv2_bt);
         this.layer.add(lv3_bt);
+
+
         //sthis.layer.add(home_bt);
       //  this.layer.add(info_bt);
      //   this.layer.add(logo_font);

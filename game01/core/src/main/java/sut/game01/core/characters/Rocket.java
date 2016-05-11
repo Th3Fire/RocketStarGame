@@ -10,10 +10,8 @@ import playn.core.util.Clock;
 import sut.game01.core.GraGame;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
-/**
- * Created by Administrator on 30/3/2559.
- */
-public class Zealot {
+
+public class Rocket {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
@@ -33,12 +31,12 @@ public class Zealot {
     private float y; //<<
     private Body body; //<<
 
-    public Zealot(final World world,final float _x, final float _y){  //<<
+    public Rocket(final World world,final float _x, final float _y){  //<<
 
         this.x = _x; //<<
         this.y = _y; //<<
 
-        sprite = SpriteLoader.getSprite("images/zealot.json");
+        sprite = SpriteLoader.getSprite("images/rocket.json");
         sprite.addCallback(new Callback<Sprite>() {
             @Override
             public void onSuccess(Sprite result) {
@@ -55,7 +53,10 @@ public class Zealot {
                 PlayN.log().error("Error loading image!",cause);
             }
         });
+
+
     }
+
     public Layer layer(){
         return sprite.layer();
     }
@@ -75,7 +76,7 @@ public class Zealot {
 
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
-            sprite.layer().setTranslation(body.getPosition().x / GraGame.M_PER_PIXEL + 3,  //<<
+            sprite.layer().setTranslation(body.getPosition().x / GraGame.M_PER_PIXEL + 1,  //<<
                     body.getPosition().y / GraGame.M_PER_PIXEL);  //<<
             e = 0;
         }
@@ -89,13 +90,13 @@ public class Zealot {
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(70 * GraGame.M_PER_PIXEL/2,
+        shape.setAsBox(33 * GraGame.M_PER_PIXEL/2,
                 sprite.layer().height()*GraGame.M_PER_PIXEL / 2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 0.4f;
+        fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.1f;
-        fixtureDef.restitution = 0.35f;
+        fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
 
        // body.createFixture(fixtureDef);
@@ -106,12 +107,17 @@ public class Zealot {
         return body;
     }
 
+    public Body getBody() {
+        return body;
+    }
+
+
     public void paint(Clock clock){
         if(!hasLoaded) return;
 
         sprite.layer().setTranslation(
-                (body.getPosition().x / GraGame.M_PER_PIXEL +3),
+                (body.getPosition().x / GraGame.M_PER_PIXEL + 1),
                 body.getPosition().y / GraGame.M_PER_PIXEL);
-        sprite.layer().setRotation(body.getAngle());
+        //sprite.layer().setRotation(body.getAngle());
     }  //<< end
 }
