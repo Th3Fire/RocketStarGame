@@ -7,7 +7,7 @@ import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
 import playn.core.*;
 import playn.core.util.Clock;
-import sut.game01.core.characters.Zealot;
+import sut.game01.core.characters.Rocket;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 
@@ -31,20 +31,21 @@ public class GraGame extends Screen{
     private boolean showDebugDraw = true;
     private DebugDrawBox2D debugDraw;
 
-    private Zealot zealot;  //<<
+    private Rocket zealot;
 
-    private List<Zealot> zealotMap;  //<<
+    private List<Rocket> zealotMap;
 
 
     public GraGame(final ScreenStack ss){
         this.ss = ss;
+
 
         Vec2 gravity = new Vec2(0.0f , 10.0f);
         world = new World(gravity);
         world.setWarmStarting(true);
         world.setAutoClearForces(true);
 
-        zealotMap = new ArrayList<Zealot>();  //<<
+        zealotMap = new ArrayList<Rocket>();  //<<
 
         Image bgImage = assets().getImage("images/bg.png");
         bg = PlayN.graphics().createImageLayer(bgImage);
@@ -53,7 +54,9 @@ public class GraGame extends Screen{
         //Image image = assets().getImage("images/sound_bt.png");
         //ImageLayer test1 = graphics().createImageLayer(image);
 
-        zealot = new Zealot(world,320f,200f);  //<<
+        zealot = new Rocket(world,320f,200f);  //<<
+
+
 
     }
 
@@ -66,8 +69,13 @@ public class GraGame extends Screen{
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
 
-                Zealot ze = new Zealot(world,(float)event.x(),(float)event.y());  //<< start
+                Rocket ze = new Rocket(world,event.x(),event.y());  //<< start
+
                 zealotMap.add(ze);
+
+
+
+
 
                 //BodyDef bodyDef = new BodyDef();
                 //bodyDef.type = BodyType.DYNAMIC;
@@ -86,11 +94,13 @@ public class GraGame extends Screen{
 
                 //body.createFixture(fixtureDef);
                 //body.setLinearDamping(0.2f);
+
             }
         });
         this.layer.add(zealot.layer());
-        for(Zealot z: zealotMap){
-            System.out.print("add");
+
+        for(Rocket z: zealotMap){
+            System.out.println("add");
             this.layer.add(z.layer());
         }  //<< End
 
@@ -129,6 +139,12 @@ public class GraGame extends Screen{
         EdgeShape groundShape3 = new EdgeShape();
         groundShape3.set(new Vec2(width,0), new Vec2(width, height));  //ขวา
         ground3.createFixture(groundShape3, 0.0f);
+
+        Body ground4 = world.createBody(new BodyDef());
+        EdgeShape groundShape4 = new EdgeShape();
+        groundShape4.set(new Vec2(0,0), new Vec2(width, 0));  //บน
+        ground3.createFixture(groundShape4, 0.0f);
+
     }
 
 
@@ -136,7 +152,7 @@ public class GraGame extends Screen{
     public void update(int delta) {
         super.update(delta);
         zealot.update(delta);  //<< start
-        for(Zealot z: zealotMap){
+        for(Rocket z: zealotMap){
             this.layer.add(z.layer());
             z.update(delta);
         } //<< end
@@ -148,7 +164,7 @@ public class GraGame extends Screen{
     public void paint(Clock clock) {
         super.paint(clock);
         zealot.paint(clock); //<<  start
-        for (Zealot z: zealotMap){
+        for (Rocket z: zealotMap){
             z.paint(clock);
         }  //<< end
 

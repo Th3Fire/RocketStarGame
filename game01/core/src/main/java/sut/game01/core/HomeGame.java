@@ -3,17 +3,11 @@ package sut.game01.core;
 /**
  * Created by Wuttinunt on 27/03/2016.
  */
-import static playn.core.PlayN.*;
-import playn.core.Image;
-import playn.core.ImageLayer;
-import playn.core.Keyboard;
-import playn.core.Mouse;
-import playn.core.Key;
-import playn.core.Keyboard;
-
+import playn.core.*;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
-import tripleplay.ui.*;
+
+import static playn.core.PlayN.*;
 
 
 public class HomeGame extends Screen{
@@ -86,7 +80,7 @@ public class HomeGame extends Screen{
             @Override
             public void onKeyUp(Keyboard.Event event) {
                 if(event.key() == Key.ENTER ){
-                    ss.push(test);
+                    ss.push(new LevelSelect(ss));
                 }
             }
         });
