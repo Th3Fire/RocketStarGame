@@ -107,9 +107,9 @@ public class GraGame extends Screen{
             debugDraw.setFillAlpha(75);
             debugDraw.setStrokeWidth(2.0f);
             debugDraw.setFlags(
-                    DebugDraw.e_shapeBit |
-                            DebugDraw.e_jointBit |
-                            DebugDraw.e_aabbBit
+                            DebugDraw.e_shapeBit |
+                            DebugDraw.e_jointBit
+                           // DebugDraw.e_aabbBit
             );
             debugDraw.setCamera(0,0,1f / GraGame.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
@@ -117,17 +117,17 @@ public class GraGame extends Screen{
 
         Body ground = world.createBody(new BodyDef());
         EdgeShape groundShape = new EdgeShape();
-        groundShape.set(new Vec2(0,height), new Vec2(width, height));
+        groundShape.set(new Vec2(0,height), new Vec2(width, height));  // ล่าง
         ground.createFixture(groundShape, 0.0f);
 
         Body ground2 = world.createBody(new BodyDef());
         EdgeShape groundShape2 = new EdgeShape();
-        groundShape2.set(new Vec2(0,0), new Vec2(0, height));
+        groundShape2.set(new Vec2(0,0), new Vec2(0, height));  //ซ้าย
         ground2.createFixture(groundShape2, 0.0f);
 
         Body ground3 = world.createBody(new BodyDef());
         EdgeShape groundShape3 = new EdgeShape();
-        groundShape3.set(new Vec2(width,0), new Vec2(width, height));
+        groundShape3.set(new Vec2(width,0), new Vec2(width, height));  //ขวา
         ground3.createFixture(groundShape3, 0.0f);
     }
 
