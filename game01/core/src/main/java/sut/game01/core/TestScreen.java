@@ -1,18 +1,15 @@
 package sut.game01.core;
 
-/**
- * Created by Wuttinunt on 27/03/2016.
- */
+
 import playn.core.Image;
 import playn.core.ImageLayer;
+import playn.core.Mouse;
+import playn.core.PlayN;
 import sut.game01.core.characters.Zealot;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
-import playn.core.PlayN;
-import static playn.core.PlayN.*;
-import playn.core.Key;
-import playn.core.Keyboard;
-import playn.core.Mouse;
+
+import static playn.core.PlayN.assets;
 
 
 public class TestScreen extends Screen{
@@ -74,7 +71,7 @@ public class TestScreen extends Screen{
         });
 
 
-        z = new Zealot(300f,430f);
+        //z = new Zealot(300f,430f);
         this.layer.add(z.layer());
 
 
