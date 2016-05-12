@@ -4,13 +4,15 @@ import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
 import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.collision.Manifold;
-import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.EdgeShape;
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.BodyDef;
+import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.*;
 import playn.core.util.Clock;
+import sut.game01.core.characters.Coin;
 import sut.game01.core.characters.Rocket;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
@@ -27,6 +29,7 @@ import static playn.core.PlayN.*;
 public class GameplayScreen extends Screen{
     private final ScreenStack ss;
 
+
     public static float M_PER_PIXEL = 1 / 26.666667f;
 
     //size of world
@@ -38,15 +41,23 @@ public class GameplayScreen extends Screen{
     private DebugDrawBox2D debugDraw;
 
     private Rocket rocket;
+    private Coin coin;
 
-    private List<Rocket> zealotMap;
+    //private List<Rocket> zealotMap;
 
-    private HashMap<Body, String> bodies = new HashMap<Body, String>();
+    //private HashMap<Body, String> bodies = new HashMap<Body, String>();
+
+    public static HashMap<Body, String> bodies  = new HashMap<Body, String>();
     private List<Body> delete = new ArrayList<Body>();
+
+    private List<Coin> coinMap;
+
 
     private int i = 0;
     private int score = 0;
     private String debugString = "";
+    public static int checkR = -18;
+    public static int checkC = -1;
 
     public GameplayScreen (final ScreenStack ss){
         this.ss = ss;
@@ -56,15 +67,13 @@ public class GameplayScreen extends Screen{
         world.setWarmStarting(true);
         world.setAutoClearForces(true);
 
-        zealotMap = new ArrayList<Rocket>();
+        //coinMap = new ArrayList<Coin>();
 
         rocket = new Rocket(world,320f,200f);  //<<
+        coin = new Coin(world,310f,210f);
 
 
     }
-
-
-
 
     @Override
     public void wasShown() {
@@ -85,7 +94,7 @@ public class GameplayScreen extends Screen{
         shieldP.setTranslation(225,1);
         this.layer.add(shieldP);
 
-        Image coins = assets().getImage("images/coins.png");
+        final Image coins = assets().getImage("images/coins.png");
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
         coinsP.setTranslation(440,1);
         this.layer.add(coinsP);
@@ -112,17 +121,21 @@ public class GameplayScreen extends Screen{
 
 
 
-
+/*
         mouse().setListener(new Mouse.Adapter(){
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
-
+/*
 
                 //Rocket ze = new Rocket(world,event.x(),event.y());  //<< start
 
                 //zealotMap.add(ze);
+*/
+                //Coin cc = new Coin(world,event.x(),event.y());
 
+                //coinMap.add(cc);
 
+/*
                 BodyDef bodyDef = new BodyDef();
                 bodyDef.type = BodyType.STATIC;
                 bodyDef.position = new Vec2(event.x() * M_PER_PIXEL,event.y() * M_PER_PIXEL);
@@ -131,6 +144,8 @@ public class GameplayScreen extends Screen{
 
                 CircleShape shape = new CircleShape();
                 shape.setRadius(0.4f);
+
+
 
                 FixtureDef fixtureDef = new FixtureDef();
                 fixtureDef.shape = shape;
@@ -141,11 +156,16 @@ public class GameplayScreen extends Screen{
                 body.createFixture(fixtureDef);
                 body.setLinearDamping(0.2f);
 
-                bodies.put(body, "Ob_" + i);
+
+
+                bodies.put(coin.getBody(), "Ob_" + i);
+                System.out.println(">>>>"+coin.getBody());
                 i++;
 
+
             }
-        });
+        }); */
+
 
         ////////// contact
 
@@ -155,11 +175,11 @@ public class GameplayScreen extends Screen{
                 Body a = contact.getFixtureA().getBody();
                 Body b = contact.getFixtureB().getBody();
                 System.out.println(bodies.get(a) + " and " + bodies.get(b));
-                if(bodies.get(b) != null){
+                if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == coin.getBody()){
                     score++;
                     debugString = bodies.get(a) + " contacted with " + bodies.get(b) + " score = " + score;
-                    b.setActive(false);
-                    delete.add(b);
+                    //b.setActive(false);
+                    //delete.add(b);
 
                 }
             }
@@ -182,7 +202,9 @@ public class GameplayScreen extends Screen{
 
         //////////////
 
-         this.layer.add(rocket.layer());
+        this.layer.add(rocket.layer());
+        this.layer.add(coin.layer());
+
 
 
 
@@ -203,10 +225,15 @@ public class GameplayScreen extends Screen{
         }));
 
 
-        for(Rocket z: zealotMap){
-            System.out.println("add");
-            this.layer.add(z.layer());
-        }  //<< End
+       // for(Rocket z: zealotMap){
+        //    System.out.println("add");
+        //    this.layer.add(z.layer());
+       // }  //<< End
+
+        //for(Coin c: coinMap){
+        //    System.out.println("add");
+        //    this.layer.add(c.layer());
+        //}  //<< End
 
         if(showDebugDraw){
             CanvasImage image = graphics().createImage(
@@ -256,11 +283,17 @@ public class GameplayScreen extends Screen{
     public void update(int delta) {
         super.update(delta);
         rocket.update(delta);  //<< start
+        coin.update(delta);
         while (delete.size() > 0) world.destroyBody(delete.remove(0));
-        for(Rocket z: zealotMap){
-            this.layer.add(z.layer());
-            z.update(delta);
-        } //<< end
+        //for(Rocket z: zealotMap){
+        //    this.layer.add(z.layer());
+        //    z.update(delta);
+        //} //<< end
+
+        //for(Coin c: coinMap){
+        //    this.layer.add(c.layer());
+        //    c.update(delta);
+       // } //<< end
         world.step(0.033f, 10, 10);
     }
 
@@ -268,9 +301,14 @@ public class GameplayScreen extends Screen{
     public void paint(Clock clock) {
         super.paint(clock);
         rocket.paint(clock); //<<  start
-        for (Rocket z: zealotMap){
-            z.paint(clock);
-        }  //<< end
+        coin.paint(clock);
+        //for (Rocket z: zealotMap){
+        //    z.paint(clock);
+        //}  //<< end
+
+       // for (Coin c: coinMap){
+       //     c.paint(clock);
+       //}  //<< end
 
         if(showDebugDraw) {
             debugDraw.getCanvas().clear();
