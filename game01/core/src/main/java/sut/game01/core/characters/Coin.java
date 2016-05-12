@@ -12,7 +12,7 @@ import sut.game01.core.GraGame;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 
-public class Rocket {
+public class Coin {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
@@ -32,12 +32,12 @@ public class Rocket {
     private float y; //<<
     private Body body; //<<
 
-    public Rocket(final World world,final float _x, final float _y){  //<<
+    public Coin(final World world, final float _x, final float _y){  //<<
 
         this.x = _x; //<<
         this.y = _y; //<<
 
-        sprite = SpriteLoader.getSprite("images/rocket.json");
+        sprite = SpriteLoader.getSprite("images/coin.json");
         sprite.addCallback(new Callback<Sprite>() {
             @Override
             public void onSuccess(Sprite result) {
@@ -86,15 +86,17 @@ public class Rocket {
 
     private Body initPhysicsBody(World world, float x, float y){  //<< Start
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyType.DYNAMIC;
-        bodyDef.position = new Vec2(0, 0);
+        bodyDef.type = BodyType.STATIC;
+        bodyDef.position = new Vec2(200/26.666667f, 200/26.666667f);
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(33 * GraGame.M_PER_PIXEL/2,
+        shape.setAsBox(60 * GraGame.M_PER_PIXEL/2,
                 sprite.layer().height()*GraGame.M_PER_PIXEL / 2);
-        GameplayScreen.bodies.put(body, "Rocket > " + GameplayScreen.checkR );
-        GameplayScreen.checkR++;
+
+        GameplayScreen.bodies.put(body, "Coin > " + GameplayScreen.checkC );
+        GameplayScreen.checkC++;
+
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
@@ -102,10 +104,10 @@ public class Rocket {
         fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
 
-       // body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
 
-        body.setLinearDamping(0.2f);
-        body.setTransform(new Vec2(x, y), 0f);
+       // body.setLinearDamping(0.2f);
+        //body.setTransform(new Vec2(x, y), 0f);
 
         return body;
     }
