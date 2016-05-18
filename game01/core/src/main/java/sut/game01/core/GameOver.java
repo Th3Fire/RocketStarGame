@@ -3,14 +3,14 @@ package sut.game01.core;
 /**
  * Created by Wuttinunt on 27/03/2016.
  */
-import static playn.core.PlayN.*;
 import playn.core.Image;
 import playn.core.ImageLayer;
 import playn.core.Mouse;
-
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
-import tripleplay.ui.*;
+
+import static playn.core.PlayN.assets;
+import static playn.core.PlayN.graphics;
 
 public class GameOver extends  Screen{
     private final ImageLayer bg;
@@ -51,6 +51,8 @@ public class GameOver extends  Screen{
             public void onMouseUp(Mouse.ButtonEvent event) {
 
 
+                ss.remove(ss.top());
+                ss.remove(ss.top());
                 ss.remove(ss.top());
 
             }
