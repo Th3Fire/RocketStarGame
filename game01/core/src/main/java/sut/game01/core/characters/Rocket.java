@@ -101,6 +101,7 @@ public class Rocket {
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 100f;
         fixtureDef.restitution = 0f;
+        //body.setBullet(true);
         body.createFixture(fixtureDef);
 
        // body.createFixture(fixtureDef);
