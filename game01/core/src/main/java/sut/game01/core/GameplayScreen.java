@@ -2,7 +2,6 @@ package sut.game01.core;
 
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
-import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.collision.Manifold;
 import org.jbox2d.collision.shapes.EdgeShape;
 import org.jbox2d.common.Vec2;
@@ -32,6 +31,8 @@ public class GameplayScreen extends Screen{
     private ImageLayer liftP;
     private ImageLayer liftP2;
     private ImageLayer liftP3;
+    ToolsG toolsG = new ToolsG();
+    public static boolean CheckGetPosition = false;
 
     public static float M_PER_PIXEL = 1 / 26.666667f;
 
@@ -66,6 +67,8 @@ public class GameplayScreen extends Screen{
     private String debugString = "";
     public static int checkR = -1;
     public static int checkC = -1;
+    public static float mouse_x = 0f;
+    public static float mouse_y = 0f;
 
     public GameplayScreen (final ScreenStack ss){
         this.ss = ss;
@@ -75,9 +78,11 @@ public class GameplayScreen extends Screen{
         world.setWarmStarting(true);
         world.setAutoClearForces(true);
 
+
+
         //coinMap = new ArrayList<Coin>();
 
-        rocket = new Rocket(world,320f,200f);  //<<
+        rocket = new Rocket(world,320f,480f);  //<<
         coin = new Coin(world,310f,210f);
         ufo = new Ufo2(world,400f,100f);
         heart = new Heart(world,100f,100f);
@@ -98,18 +103,12 @@ public class GameplayScreen extends Screen{
         liftP3.setTranslation(90,1);
 
 
-
     }
 
     @Override
     public void wasShown() {
         super.wasShown();
-
-
-
         this.layer.add(bg);
-
-
         this.layer.add(liftP);
         this.layer.add(liftP2);
         this.layer.add(liftP3);
@@ -123,7 +122,6 @@ public class GameplayScreen extends Screen{
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
         coinsP.setTranslation(440,1);
         this.layer.add(coinsP);
-
 
 /*
         PlayN.keyboard().setListener((new Keyboard.Adapter(){
@@ -143,8 +141,6 @@ public class GameplayScreen extends Screen{
         }));
 
         */
-
-
 
 /*
         mouse().setListener(new Mouse.Adapter(){
@@ -170,8 +166,6 @@ public class GameplayScreen extends Screen{
                 CircleShape shape = new CircleShape();
                 shape.setRadius(0.4f);
 
-
-
                 FixtureDef fixtureDef = new FixtureDef();
                 fixtureDef.shape = shape;
                 fixtureDef.density = 0.4f;
@@ -180,8 +174,6 @@ public class GameplayScreen extends Screen{
 
                 body.createFixture(fixtureDef);
                 body.setLinearDamping(0.2f);
-
-
 
                 bodies.put(coin.getBody(), "Ob_" + i);
                 System.out.println(">>>>"+coin.getBody());
@@ -193,6 +185,14 @@ public class GameplayScreen extends Screen{
 
 
         ////////// contact
+        PlayN.mouse().setListener(new Mouse.Adapter(){
+            @Override
+            public void onMouseMove(Mouse.MotionEvent event) {
+                mouse_x = event.x();
+                mouse_y = event.y();
+
+            }
+        });
 
         world.setContactListener(new ContactListener() {
             @Override
@@ -206,7 +206,7 @@ public class GameplayScreen extends Screen{
                     //b.setActive(false);
                     //delete.add(b);
 
-                }else  if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == ufo.getBody()){
+                }else  if(contact.getFixtureA().getBody() == ufo.getBody() || contact.getFixtureB().getBody() == ufo.getBody()){
                     if(lifeTotal <=3) {
                         if(lifeTotal == 3) {
                             liftP3.setVisible(false);
@@ -220,26 +220,44 @@ public class GameplayScreen extends Screen{
                             liftP.setVisible(false);
                             lifeTotal--;
                             checkLifeFull = false;
-                        }else {
+                            if(lifeTotal == 0){
+                                ss.push(new GameOver(ss));
+                                lifeTotal = 3;
+                                checkLifeFull = false;
+                            }
+                        }else if(lifeTotal == 0){
                             ss.push(new GameOver(ss));
                             lifeTotal = 3;
                             checkLifeFull = false;
                         }
+                        System.out.println("life total = " + lifeTotal);
 
                     }
 
-                }else  if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == heart.getBody()){
+                }else  if(contact.getFixtureA().getBody() == heart.getBody() || contact.getFixtureB().getBody() == heart.getBody()){
                         System.out.println("contacted Heart.");
                         System.out.println("life total = "+ lifeTotal);
                         if(lifeTotal <=3 && checkLifeFull == false){
                             if(lifeTotal == 1){
-                                liftP.setVisible(true);
+                                lifeTotal++;
                             }else if (lifeTotal == 2){
-                                liftP2.setVisible(true);
+                                lifeTotal++;
                             }else if (lifeTotal == 3){
-                                liftP3.setVisible(true);
                                 checkLifeFull = true;
 
+                            }
+                            if(lifeTotal == 1){
+                                liftP.setVisible(true);
+                                liftP2.setVisible(false);
+                                liftP3.setVisible(false);
+                            }else if(lifeTotal == 2){
+                                liftP.setVisible(true);
+                                liftP2.setVisible(true);
+                                liftP3.setVisible(false);
+                            }else if (lifeTotal == 3){
+                                liftP.setVisible(true);
+                                liftP2.setVisible(true);
+                                liftP3.setVisible(true);
                             }
                         }
 
@@ -271,23 +289,21 @@ public class GameplayScreen extends Screen{
         this.layer.add(ufo.layer());
         this.layer.add(heart.layer());
 
-
-
+        //
 
         keyboard().setListener((new Keyboard.Adapter(){
             @Override
-            public void onKeyUp(Keyboard.Event event) {
+            public void onKeyDown(Keyboard.Event event) {
                 if(event.key() == Key.LEFT){
                     rocket.getBody().applyForce(new Vec2(-100f,0f),rocket.getBody().getPosition());
                 }else if(event.key() == Key.RIGHT) {
                     rocket.getBody().applyForce(new Vec2(100f, -0f), rocket.getBody().getPosition());
                 }else if(event.key() == Key.SPACE){
                     rocket.getBody().applyForce(new Vec2(0f, -1000f), rocket.getBody().getPosition());
+
                 }else if(event.key() == Key.ESCAPE){
                     ss.remove(ss.top());
                     ss.remove(ss.top());
-
-
 
                 }
             }
@@ -316,11 +332,12 @@ public class GameplayScreen extends Screen{
             debugDraw.setStrokeAlpha(150);
             debugDraw.setFillAlpha(75);
             debugDraw.setStrokeWidth(2.0f);
-            debugDraw.setFlags(
+            /*debugDraw.setFlags(
                             DebugDraw.e_shapeBit |
                             DebugDraw.e_jointBit
                      //DebugDraw.e_aabbBit
             );
+            */
             debugDraw.setCamera(0,0,1f / GraGame.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
         }
@@ -345,8 +362,8 @@ public class GameplayScreen extends Screen{
         groundShape4.set(new Vec2(0,0), new Vec2(width, 0));  //บน
         ground4.createFixture(groundShape4, 0.0f);
 
-
     }
+
 
     @Override
     public void update(int delta) {
@@ -355,6 +372,7 @@ public class GameplayScreen extends Screen{
         coin.update(delta);
         ufo.update(delta);
         heart.update(delta);
+
         //while (delete.size() > 0) world.destroyBody(delete.remove(0));
         //for(Rocket z: zealotMap){
         //    this.layer.add(z.layer());
@@ -375,6 +393,12 @@ public class GameplayScreen extends Screen{
         coin.paint(clock);
         ufo.paint(clock);
         heart.paint(clock);
+        //System.out.println("mouse x = " + mouse_x);
+        //System.out.println("mouse y = " + mouse_y);
+
+        //if(rocket.getBody().getPosition().x != mouse_x){
+          //  rocket.getBody().applyForce(new Vec2(5f, 0f), rocket.getBody().getPosition());
+        //}
         //for (Rocket z: zealotMap){
         //    z.paint(clock);
         //}  //<< end

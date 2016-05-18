@@ -34,8 +34,8 @@ public class Rocket {
 
     public Rocket(final World world,final float _x, final float _y){  //<<
 
-        this.x = _x; //<<
-        this.y = _y; //<<
+        this.x = GameplayScreen.mouse_x; //<<
+        this.y = GameplayScreen.mouse_y; //<<
 
         sprite = SpriteLoader.getSprite("images/rocket.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -45,7 +45,7 @@ public class Rocket {
                 sprite.setSprite(spriteIndex);
                 sprite.layer().setOrigin(sprite.width() / 2f, sprite.height() / 2f);
                 sprite.layer().setTranslation(x,y + 3f);  //<<
-                body = initPhysicsBody(world, GraGame.M_PER_PIXEL * x, GraGame.M_PER_PIXEL * y);  //<<
+                body = initPhysicsBody(world, GraGame.M_PER_PIXEL * GameplayScreen.mouse_x, GraGame.M_PER_PIXEL * GameplayScreen.mouse_y);  //<<
                 hasLoaded = true;
             }
 
@@ -85,6 +85,7 @@ public class Rocket {
     }
 
     private Body initPhysicsBody(World world, float x, float y){  //<< Start
+
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(0, 0);
@@ -98,7 +99,7 @@ public class Rocket {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.1f;
+        fixtureDef.friction = 100f;
         fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
 
@@ -119,8 +120,9 @@ public class Rocket {
         if(!hasLoaded) return;
 
         sprite.layer().setTranslation(
-                (body.getPosition().x / GraGame.M_PER_PIXEL + 1),
-                body.getPosition().y / GraGame.M_PER_PIXEL);
+                (GameplayScreen.mouse_x ),
+                GameplayScreen.mouse_y );
+        body.setTransform(new Vec2(GameplayScreen.mouse_x * GraGame.M_PER_PIXEL,GameplayScreen.mouse_y * GraGame.M_PER_PIXEL),0f);
         //sprite.layer().setRotation(body.getAngle());
     }  //<< end
 }
