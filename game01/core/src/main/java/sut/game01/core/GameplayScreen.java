@@ -206,7 +206,7 @@ public class GameplayScreen extends Screen{
                     //b.setActive(false);
                     //delete.add(b);
 
-                }else  if(contact.getFixtureA().getBody() == ufo.getBody() || contact.getFixtureB().getBody() == ufo.getBody()){
+                }else  if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == ufo.getBody()){
                     if(lifeTotal <=3) {
                         if(lifeTotal == 3) {
                             liftP3.setVisible(false);
@@ -234,16 +234,24 @@ public class GameplayScreen extends Screen{
 
                     }
 
-                }else  if(contact.getFixtureA().getBody() == heart.getBody() || contact.getFixtureB().getBody() == heart.getBody()){
+                }else  if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == heart.getBody()){
                         System.out.println("contacted Heart.");
-                        System.out.println("life total = "+ lifeTotal);
+                        //System.out.println("life total = "+ lifeTotal);
                         if(lifeTotal <=3 && checkLifeFull == false){
                             if(lifeTotal == 1){
                                 lifeTotal++;
                             }else if (lifeTotal == 2){
                                 lifeTotal++;
+                                if(lifeTotal == 3){
+                                    System.out.println("Life Max.");
+                                    checkLifeFull = true;
+
+                                }
+
                             }else if (lifeTotal == 3){
-                                checkLifeFull = true;
+
+
+                                System.out.println("Life Max.");
 
                             }
                             if(lifeTotal == 1){
@@ -259,7 +267,11 @@ public class GameplayScreen extends Screen{
                                 liftP2.setVisible(true);
                                 liftP3.setVisible(true);
                             }
+                        }else if(lifeTotal == 3 && checkLifeFull == true){
+                            System.out.println("Life Max.");
                         }
+                    System.out.println("life total = "+ lifeTotal);
+
 
 
 
@@ -332,12 +344,12 @@ public class GameplayScreen extends Screen{
             debugDraw.setStrokeAlpha(150);
             debugDraw.setFillAlpha(75);
             debugDraw.setStrokeWidth(2.0f);
-            /*debugDraw.setFlags(
+        /*    debugDraw.setFlags(
                             DebugDraw.e_shapeBit |
                             DebugDraw.e_jointBit
                      //DebugDraw.e_aabbBit
-            );
-            */
+            ); */
+
             debugDraw.setCamera(0,0,1f / GraGame.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
         }

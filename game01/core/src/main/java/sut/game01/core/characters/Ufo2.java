@@ -86,12 +86,12 @@ public class Ufo2 {
 
     private Body initPhysicsBody(World world, float x, float y){  //<< Start
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyType.STATIC;
+        bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(200/26.666667f, 200/26.666667f);
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(60 * GraGame.M_PER_PIXEL/2,
+        shape.setAsBox(30 * GraGame.M_PER_PIXEL/2,
                 sprite.layer().height()*GraGame.M_PER_PIXEL / 2);
 
         GameplayScreen.bodies.put(body, "ufo_2 > " + GameplayScreen.checkC );
@@ -102,6 +102,7 @@ public class Ufo2 {
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0f;
+        //body.setBullet(true);
         body.createFixture(fixtureDef);
 
         //body.createFixture(fixtureDef);
