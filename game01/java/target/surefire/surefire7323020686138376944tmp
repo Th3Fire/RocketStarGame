@@ -1,5 +1,5 @@
 #surefire
-#Wed May 18 12:03:32 ICT 2016
+#Wed May 18 14:15:18 ICT 2016
 enableAssertions=true
 testSuiteDefinitionTestSourceDirectory=C\:\\cygwin64\\home\\Wuttinunt\\projects\\RocketStarGame\\game01\\java\\src\\test\\java
 surefireClassPathUrl.1=C\:\\Users\\Wuttinunt\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\2.10\\surefire-api-2.10.jar
