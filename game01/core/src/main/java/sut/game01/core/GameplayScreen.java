@@ -13,13 +13,13 @@ import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.*;
 import playn.core.util.Clock;
 import sut.game01.core.characters.Coin;
+import sut.game01.core.characters.Heart;
 import sut.game01.core.characters.Rocket;
+import sut.game01.core.characters.Ufo2;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static playn.core.PlayN.*;
 
@@ -28,7 +28,10 @@ import static playn.core.PlayN.*;
  */
 public class GameplayScreen extends Screen{
     private final ScreenStack ss;
-
+    private ImageLayer bg;
+    private ImageLayer liftP;
+    private ImageLayer liftP2;
+    private ImageLayer liftP3;
 
     public static float M_PER_PIXEL = 1 / 26.666667f;
 
@@ -42,21 +45,26 @@ public class GameplayScreen extends Screen{
 
     private Rocket rocket;
     private Coin coin;
+    private Ufo2 ufo;
+    private Heart heart;
 
     //private List<Rocket> zealotMap;
 
     //private HashMap<Body, String> bodies = new HashMap<Body, String>();
 
     public static HashMap<Body, String> bodies  = new HashMap<Body, String>();
-    private List<Body> delete = new ArrayList<Body>();
+    //private List<Body> delete = new ArrayList<Body>();
 
-    private List<Coin> coinMap;
+    //private List<Coin> coinMap;
 
 
     private int i = 0;
     private int score = 0;
+    public static int lifeTotal =3;
+    private boolean checkLifeFull = false;
+
     private String debugString = "";
-    public static int checkR = -18;
+    public static int checkR = -1;
     public static int checkC = -1;
 
     public GameplayScreen (final ScreenStack ss){
@@ -71,6 +79,24 @@ public class GameplayScreen extends Screen{
 
         rocket = new Rocket(world,320f,200f);  //<<
         coin = new Coin(world,310f,210f);
+        ufo = new Ufo2(world,400f,100f);
+        heart = new Heart(world,100f,100f);
+
+        Image bgImage = assets().getImage("images/bgGameplay2.png");
+        bg = PlayN.graphics().createImageLayer(bgImage);
+
+        Image life = assets().getImage("images/life_1.png");
+        liftP = PlayN.graphics().createImageLayer(life);
+        liftP.setTranslation(10,1);
+
+        Image life2 = assets().getImage("images/life_1.png");
+        liftP2 = PlayN.graphics().createImageLayer(life2);
+        liftP2.setTranslation(50,1);
+
+        Image life3 = assets().getImage("images/life_1.png");
+        liftP3 = PlayN.graphics().createImageLayer(life3);
+        liftP3.setTranslation(90,1);
+
 
 
     }
@@ -80,14 +106,13 @@ public class GameplayScreen extends Screen{
         super.wasShown();
 
 
-        Image bgImage = assets().getImage("images/bgGameplay2.png");
-        ImageLayer bg = PlayN.graphics().createImageLayer(bgImage);
+
         this.layer.add(bg);
 
-        Image life = assets().getImage("images/life.png");
-        ImageLayer liftP = PlayN.graphics().createImageLayer(life);
-        liftP.setTranslation(10,1);
+
         this.layer.add(liftP);
+        this.layer.add(liftP2);
+        this.layer.add(liftP3);
 
         Image shield = assets().getImage("images/shield.png");
         ImageLayer shieldP = PlayN.graphics().createImageLayer(shield);
@@ -181,6 +206,45 @@ public class GameplayScreen extends Screen{
                     //b.setActive(false);
                     //delete.add(b);
 
+                }else  if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == ufo.getBody()){
+                    if(lifeTotal <=3) {
+                        if(lifeTotal == 3) {
+                            liftP3.setVisible(false);
+                            lifeTotal--;
+                            checkLifeFull = false;
+                        }else if (lifeTotal == 2){
+                            liftP2.setVisible(false);
+                            lifeTotal--;
+                            checkLifeFull = false;
+                        }else if (lifeTotal == 1){
+                            liftP.setVisible(false);
+                            lifeTotal--;
+                            checkLifeFull = false;
+                        }else {
+                            ss.push(new GameOver(ss));
+                            lifeTotal = 3;
+                            checkLifeFull = false;
+                        }
+
+                    }
+
+                }else  if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == heart.getBody()){
+                        System.out.println("contacted Heart.");
+                        System.out.println("life total = "+ lifeTotal);
+                        if(lifeTotal <=3 && checkLifeFull == false){
+                            if(lifeTotal == 1){
+                                liftP.setVisible(true);
+                            }else if (lifeTotal == 2){
+                                liftP2.setVisible(true);
+                            }else if (lifeTotal == 3){
+                                liftP3.setVisible(true);
+                                checkLifeFull = true;
+
+                            }
+                        }
+
+
+
                 }
             }
 
@@ -204,6 +268,8 @@ public class GameplayScreen extends Screen{
 
         this.layer.add(rocket.layer());
         this.layer.add(coin.layer());
+        this.layer.add(ufo.layer());
+        this.layer.add(heart.layer());
 
 
 
@@ -220,6 +286,9 @@ public class GameplayScreen extends Screen{
                 }else if(event.key() == Key.ESCAPE){
                     ss.remove(ss.top());
                     ss.remove(ss.top());
+
+
+
                 }
             }
         }));
@@ -250,7 +319,7 @@ public class GameplayScreen extends Screen{
             debugDraw.setFlags(
                             DebugDraw.e_shapeBit |
                             DebugDraw.e_jointBit
-                    // DebugDraw.e_aabbBit
+                     //DebugDraw.e_aabbBit
             );
             debugDraw.setCamera(0,0,1f / GraGame.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
@@ -284,7 +353,9 @@ public class GameplayScreen extends Screen{
         super.update(delta);
         rocket.update(delta);  //<< start
         coin.update(delta);
-        while (delete.size() > 0) world.destroyBody(delete.remove(0));
+        ufo.update(delta);
+        heart.update(delta);
+        //while (delete.size() > 0) world.destroyBody(delete.remove(0));
         //for(Rocket z: zealotMap){
         //    this.layer.add(z.layer());
         //    z.update(delta);
@@ -302,6 +373,8 @@ public class GameplayScreen extends Screen{
         super.paint(clock);
         rocket.paint(clock); //<<  start
         coin.paint(clock);
+        ufo.paint(clock);
+        heart.paint(clock);
         //for (Rocket z: zealotMap){
         //    z.paint(clock);
         //}  //<< end

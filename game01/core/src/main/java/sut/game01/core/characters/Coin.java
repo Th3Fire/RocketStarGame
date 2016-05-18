@@ -104,10 +104,10 @@ public class Coin {
         fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
 
-        body.createFixture(fixtureDef);
+        //body.createFixture(fixtureDef);
 
-       // body.setLinearDamping(0.2f);
-        //body.setTransform(new Vec2(x, y), 0f);
+        body.setLinearDamping(0.2f);
+        body.setTransform(new Vec2(x, y), 0f);
 
         return body;
     }

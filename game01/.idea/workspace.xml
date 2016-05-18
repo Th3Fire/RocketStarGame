@@ -28,37 +28,11 @@
       <file leaf-file-name="GameOver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+            <state relative-caret-position="470">
+              <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
               <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyGame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-              <folding>
-                <element signature="e#350#351#0" expanded="false" />
-                <element signature="e#384#385#0" expanded="false" />
-                <element signature="e#551#552#0" expanded="false" />
-                <element signature="e#579#580#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraGame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GraGame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="174" column="5" selection-start-line="162" selection-start-column="4" selection-end-line="174" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1395#1645#0" expanded="true" />
+                <element signature="e#1644#1645#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,55 +41,14 @@
       <file leaf-file-name="GameplayScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameplayScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-402">
-              <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
+            <state relative-caret-position="511">
+              <caret line="237" column="56" selection-start-line="237" selection-start-column="56" selection-end-line="237" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1356#1370#0" expanded="true" />
-                <element signature="e#1419#1425#0" expanded="true" />
-                <element signature="e#5805#6538#0" expanded="true" />
-                <element signature="e#6537#6538#0" expanded="true" />
+                <element signature="e#1551#1565#0" expanded="true" />
+                <element signature="e#8375#9111#0" expanded="true" />
+                <element signature="e#9110#9111#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Coin.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1649">
-              <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1550#1551#0" expanded="true" />
-                <element signature="e#1629#1630#0" expanded="true" />
-                <element signature="e#1676#1677#0" expanded="true" />
-                <element signature="e#1713#1714#0" expanded="true" />
-                <element signature="e#3338#3339#0" expanded="true" />
-                <element signature="e#3365#3366#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rocket.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="coin.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/coin.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -123,8 +56,72 @@
       <file leaf-file-name="HomeGame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
+            <state relative-caret-position="-1026">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+              <folding>
+                <element signature="e#3050#3051#0" expanded="true" />
+                <element signature="e#3099#3100#0" expanded="true" />
+                <element signature="e#3628#3629#0" expanded="true" />
+                <element signature="e#3677#3678#0" expanded="true" />
+                <element signature="e#3723#3963#0" expanded="true" />
+                <element signature="e#3962#3963#0" expanded="true" />
+                <element signature="e#4001#4172#0" expanded="true" />
+                <element signature="e#4171#4172#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ufo2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fire.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/fire.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+              <folding>
+                <marker date="1463545865314" expanded="true" signature="0:115" placeholder="{...}" />
+                <marker date="1463545865314" expanded="true" signature="43:113" placeholder="[...]" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Heart.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Heart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heart.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/heart.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="60" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rocket.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -134,7 +131,17 @@
         <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/rocket.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="71" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="1" />
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="6" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ufo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="844">
+              <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -158,11 +165,18 @@
         <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Zealot.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/GraGame.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java" />
-        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/LevelSelect.java" />
         <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/coin.json" />
-        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/LevelSelect.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo.java" />
+        <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/ufo.json" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo2.java" />
+        <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/heart.json" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Heart.java" />
+        <option value="$PROJECT_DIR$/assets/src/main/resources/assets/images/fire.json" />
+        <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java" />
         <option value="$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameplayScreen.java" />
       </list>
     </option>
@@ -182,8 +196,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
     <option name="y" value="-4" />
-    <option name="width" value="1374" />
-    <option name="height" value="748" />
+    <option name="width" value="1928" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -378,19 +392,20 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="D:/jack" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="sut.game01.core.characters" />
+      <recent name="sut.game01.core" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\cygwin64\home\Wuttinunt\projects\RocketStarGame\game01\assets\src\main\resources\assets\images" />
@@ -699,7 +714,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1374" height="748" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -709,16 +724,16 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36349693" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11514523" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35065886" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24947916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937758" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -744,10 +759,50 @@
     </ignored-roots>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#350#351#0" expanded="false" />
+            <element signature="e#384#385#0" expanded="false" />
+            <element signature="e#551#552#0" expanded="false" />
+            <element signature="e#579#580#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GraGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="174" column="5" selection-start-line="162" selection-start-column="4" selection-end-line="174" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -763,6 +818,7 @@
         <state relative-caret-position="374">
           <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#350#351#0" expanded="false" />
             <element signature="e#384#385#0" expanded="false" />
             <element signature="e#551#552#0" expanded="false" />
@@ -787,10 +843,107 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1356#1370#0" expanded="true" />
-            <element signature="e#1419#1425#0" expanded="true" />
-            <element signature="e#5805#6538#0" expanded="true" />
-            <element signature="e#6537#6538#0" expanded="true" />
+            <element signature="e#1551#1565#0" expanded="true" />
+            <element signature="e#8375#9111#0" expanded="true" />
+            <element signature="e#9110#9111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/coin.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="73" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
+          <folding>
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+            <element signature="e#3677#3678#0" expanded="true" />
+            <element signature="e#3723#3963#0" expanded="true" />
+            <element signature="e#3962#3963#0" expanded="true" />
+            <element signature="e#4001#4172#0" expanded="true" />
+            <element signature="e#4171#4172#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/rocket.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="71" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#350#351#0" expanded="false" />
+            <element signature="e#384#385#0" expanded="false" />
+            <element signature="e#551#552#0" expanded="false" />
+            <element signature="e#579#580#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GraGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="174" column="5" selection-start-line="162" selection-start-column="4" selection-end-line="174" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameplayScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1551#1565#0" expanded="true" />
+            <element signature="e#8375#9111#0" expanded="true" />
+            <element signature="e#9110#9111#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -799,9 +952,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
           <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -809,7 +960,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1156">
           <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
-          <folding />
+          <folding>
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+            <element signature="e#3677#3678#0" expanded="true" />
+            <element signature="e#3723#3963#0" expanded="true" />
+            <element signature="e#3962#3963#0" expanded="true" />
+            <element signature="e#4001#4172#0" expanded="true" />
+            <element signature="e#4171#4172#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -837,10 +997,9 @@
           <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1356#1370#0" expanded="true" />
-            <element signature="e#1419#1425#0" expanded="true" />
-            <element signature="e#5805#6538#0" expanded="true" />
-            <element signature="e#6537#6538#0" expanded="true" />
+            <element signature="e#1551#1565#0" expanded="true" />
+            <element signature="e#8375#9111#0" expanded="true" />
+            <element signature="e#9110#9111#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,6 +1009,7 @@
         <state relative-caret-position="323">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
+            <element signature="imports" expanded="false" />
             <element signature="e#350#351#0" expanded="false" />
             <element signature="e#384#385#0" expanded="false" />
             <element signature="e#551#552#0" expanded="false" />
@@ -881,7 +1041,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+            <element signature="e#3677#3678#0" expanded="true" />
+            <element signature="e#3723#3963#0" expanded="true" />
+            <element signature="e#3962#3963#0" expanded="true" />
+            <element signature="e#4001#4172#0" expanded="true" />
+            <element signature="e#4171#4172#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -896,47 +1065,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Zealot.java" />
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-          <folding>
-            <element signature="e#350#351#0" expanded="false" />
-            <element signature="e#384#385#0" expanded="false" />
-            <element signature="e#551#552#0" expanded="false" />
-            <element signature="e#579#580#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/LevelSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GraGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
+        <state relative-caret-position="2686">
           <caret line="174" column="5" selection-start-line="162" selection-start-column="4" selection-end-line="174" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -944,19 +1079,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/MyGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/rocket.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="71" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="1" />
-          <folding />
+        <state relative-caret-position="374">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#350#351#0" expanded="false" />
+            <element signature="e#384#385#0" expanded="false" />
+            <element signature="e#551#552#0" expanded="false" />
+            <element signature="e#579#580#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -968,42 +1101,153 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java">
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+        <state relative-caret-position="578">
+          <caret line="80" column="47" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Coin.java">
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/item.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" column="29" selection-start-line="97" selection-start-column="29" selection-end-line="97" selection-end-column="29" />
+        <state relative-caret-position="17">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/LevelSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="661">
+          <caret line="274" column="26" selection-start-line="274" selection-start-column="26" selection-end-line="274" selection-end-column="26" />
+          <folding>
+            <element signature="e#3165#3338#0" expanded="true" />
+            <element signature="e#3337#3338#0" expanded="true" />
+            <element signature="e#3371#3548#0" expanded="true" />
+            <element signature="e#3547#3548#0" expanded="true" />
+            <element signature="e#3580#3752#0" expanded="true" />
+            <element signature="e#3751#3752#0" expanded="true" />
+            <element signature="class#3787:4340" expanded="false" />
+            <element signature="e#4264#4265#0" expanded="true" />
+            <element signature="e#4327#4328#0" expanded="true" />
+            <element signature="class#4377:4925" expanded="false" />
+            <element signature="e#4851#4852#0" expanded="true" />
+            <element signature="e#4914#4915#0" expanded="true" />
+            <element signature="class#4960:5515" expanded="false" />
+            <element signature="class#5552:6102" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/ufo.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="8" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="844">
+          <caret line="120" column="38" selection-start-line="120" selection-start-column="38" selection-end-line="120" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Heart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="100" column="35" selection-start-line="100" selection-start-column="35" selection-end-line="100" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/fire.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+          <folding>
+            <marker date="1463545865314" expanded="true" signature="0:115" placeholder="{...}" />
+            <marker date="1463545865314" expanded="true" signature="43:113" placeholder="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Ufo2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1629#1630#0" expanded="true" />
-            <element signature="e#1676#1677#0" expanded="true" />
-            <element signature="e#1713#1714#0" expanded="true" />
-            <element signature="e#3338#3339#0" expanded="true" />
-            <element signature="e#3365#3366#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/rocket.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="6" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/characters/Rocket.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/src/main/resources/assets/images/heart.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="60" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameOver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+          <folding>
+            <element signature="e#1395#1645#0" expanded="true" />
+            <element signature="e#1644#1645#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/HomeGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1026">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="e#3050#3051#0" expanded="true" />
+            <element signature="e#3099#3100#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+            <element signature="e#3677#3678#0" expanded="true" />
+            <element signature="e#3723#3963#0" expanded="true" />
+            <element signature="e#3962#3963#0" expanded="true" />
+            <element signature="e#4001#4172#0" expanded="true" />
+            <element signature="e#4171#4172#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/main/java/sut/game01/core/GameplayScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-402">
-          <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
+        <state relative-caret-position="511">
+          <caret line="237" column="56" selection-start-line="237" selection-start-column="56" selection-end-line="237" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1356#1370#0" expanded="true" />
-            <element signature="e#1419#1425#0" expanded="true" />
-            <element signature="e#5805#6538#0" expanded="true" />
-            <element signature="e#6537#6538#0" expanded="true" />
+            <element signature="e#1551#1565#0" expanded="true" />
+            <element signature="e#8375#9111#0" expanded="true" />
+            <element signature="e#9110#9111#0" expanded="true" />
           </folding>
         </state>
       </provider>

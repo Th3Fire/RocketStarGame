@@ -13,6 +13,7 @@ import static playn.core.PlayN.*;
 public class HomeGame extends Screen{
 
     private final ImageLayer play_bt;
+    private final ImageLayer play_bt_a;
     private final ImageLayer bg;
     private final ImageLayer setting_bt;
     private final ImageLayer sound_bt;
@@ -41,9 +42,14 @@ public class HomeGame extends Screen{
         this.play_bt = graphics().createImageLayer(playbtImage);
         play_bt.setTranslation(400,70);
 
-        Image settingImage = assets().getImage("images/setting.png");
+        Image playbt_a_Image = assets().getImage("images/play_bt_a.png");
+        this.play_bt_a = graphics().createImageLayer(playbt_a_Image);
+        play_bt_a.setTranslation(400,70);
+        play_bt_a.setVisible(false);
+
+        Image settingImage = assets().getImage("images/setting_i.png");
         this.setting_bt = graphics().createImageLayer(settingImage);
-        setting_bt.setTranslation(-10,270);
+        setting_bt.setTranslation(2,438);
 
         Image soundImage = assets().getImage("images/sound_bt.png");
         this.sound_bt = graphics().createImageLayer(soundImage);
@@ -66,7 +72,24 @@ public class HomeGame extends Screen{
         gameovertest.setTranslation(350,10);
 
 
+
+
         play_bt.addListener(new Mouse.LayerAdapter() {
+
+
+            @Override
+            public void onMouseOut(Mouse.MotionEvent event) {
+                play_bt.setVisible(true);
+                play_bt_a.setVisible(false);
+
+            }
+
+            @Override
+            public void onMouseOver(Mouse.MotionEvent event) {
+                play_bt.setVisible(false);
+                play_bt_a.setVisible(true);
+
+            }
 
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
@@ -74,6 +97,26 @@ public class HomeGame extends Screen{
             }
 
 
+        });
+
+        play_bt_a.addListener(new Mouse.LayerAdapter() {
+
+            @Override
+            public void onMouseOver(Mouse.MotionEvent event) {
+                play_bt.setVisible(false);
+                play_bt_a.setVisible(true);
+            }
+
+            @Override
+            public void onMouseOut(Mouse.MotionEvent event) {
+                play_bt.setVisible(true);
+                play_bt_a.setVisible(false);
+            }
+
+            @Override
+            public void onMouseUp(Mouse.ButtonEvent event) {
+                ss.push(lvselect);
+            }
         });
 
         keyboard().setListener(new Keyboard.Adapter(){
@@ -84,7 +127,6 @@ public class HomeGame extends Screen{
                 }
             }
         });
-
 
 
         gameovertest.addListener(new Mouse.LayerAdapter() {
@@ -99,11 +141,6 @@ public class HomeGame extends Screen{
     }
 
 
-
-
-
-
-
     @Override
     public void wasShown() {
         super.wasShown();
@@ -113,9 +150,10 @@ public class HomeGame extends Screen{
 
         this.layer.add(bg);
         this.layer.add(play_bt);
+        this.layer.add(play_bt_a);
         this.layer.add(setting_bt);
         this.layer.add(sound_bt);
-        this.layer.add(musicOn_bt);
+        //this.layer.add(musicOn_bt);
         this.layer.add(info_bt);
         this.layer.add(logo_font);
         this.layer.add(gameovertest);
