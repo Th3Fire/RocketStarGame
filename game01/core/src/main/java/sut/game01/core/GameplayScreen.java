@@ -2,6 +2,7 @@ package sut.game01.core;
 
 import org.jbox2d.callbacks.ContactImpulse;
 import org.jbox2d.callbacks.ContactListener;
+import org.jbox2d.callbacks.DebugDraw;
 import org.jbox2d.collision.Manifold;
 import org.jbox2d.collision.shapes.EdgeShape;
 import org.jbox2d.common.Vec2;
@@ -11,14 +12,15 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.*;
 import playn.core.util.Clock;
-import sut.game01.core.characters.Coin;
 import sut.game01.core.characters.Heart;
 import sut.game01.core.characters.Rocket;
 import sut.game01.core.characters.Ufo2;
 import tripleplay.game.Screen;
 import tripleplay.game.ScreenStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static playn.core.PlayN.*;
 
@@ -41,11 +43,11 @@ public class GameplayScreen extends Screen{
     private static int height = 18; //480 px
 
     private World world;
-    private boolean showDebugDraw = true;
+    private boolean showDebugDraw = false;
     private DebugDrawBox2D debugDraw;
 
     private Rocket rocket;
-    private Coin coin;
+    //private Coin coin;
     private Ufo2 ufo;
     private Heart heart;
 
@@ -54,7 +56,7 @@ public class GameplayScreen extends Screen{
     //private HashMap<Body, String> bodies = new HashMap<Body, String>();
 
     public static HashMap<Body, String> bodies  = new HashMap<Body, String>();
-    //private List<Body> delete = new ArrayList<Body>();
+    private List<Body> delete = new ArrayList<Body>();
 
     //private List<Coin> coinMap;
 
@@ -65,6 +67,7 @@ public class GameplayScreen extends Screen{
     private boolean checkLifeFull = false;
 
     private String debugString = "";
+    private String strScore = "";
     public static int checkR = -1;
     public static int checkC = -1;
     public static float mouse_x = 0f;
@@ -73,7 +76,7 @@ public class GameplayScreen extends Screen{
     public GameplayScreen (final ScreenStack ss){
         this.ss = ss;
 
-        Vec2 gravity = new Vec2(0.0f , 10.0f);
+        Vec2 gravity = new Vec2(0.0f , 0.0f);
         world = new World(gravity);
         world.setWarmStarting(true);
         world.setAutoClearForces(true);
@@ -83,7 +86,7 @@ public class GameplayScreen extends Screen{
         //coinMap = new ArrayList<Coin>();
 
         rocket = new Rocket(world,320f,480f);  //<<
-        coin = new Coin(world,310f,210f);
+        //coin = new Coin(world,310f,210f);
         ufo = new Ufo2(world,400f,100f);
         heart = new Heart(world,100f,100f);
 
@@ -122,6 +125,15 @@ public class GameplayScreen extends Screen{
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
         coinsP.setTranslation(440,1);
         this.layer.add(coinsP);
+
+
+        this.layer.add(rocket.layer());
+        //this.layer.add(coin.layer());
+        this.layer.add(ufo.layer());
+        this.layer.add(heart.layer());
+
+
+
 
 /*
         PlayN.keyboard().setListener((new Keyboard.Adapter(){
@@ -199,14 +211,16 @@ public class GameplayScreen extends Screen{
             public void beginContact(Contact contact) {
                 Body a = contact.getFixtureA().getBody();
                 Body b = contact.getFixtureB().getBody();
-                System.out.println(bodies.get(a) + " and " + bodies.get(b));
-                if(contact.getFixtureA().getBody() == coin.getBody() || contact.getFixtureB().getBody() == coin.getBody()){
+
+                /*if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == coin.getBody()){
+                    System.out.println(bodies.get(a) + " and " + bodies.get(b));
                     score++;
                     debugString = bodies.get(a) + " contacted with " + bodies.get(b) + " score = " + score;
-                    //b.setActive(false);
-                    //delete.add(b);
+                    strScore = ""+score;
 
-                }else  if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == ufo.getBody()){
+                }*/
+                if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == ufo.getBody()){
+                    System.out.println(bodies.get(a) + " contected  " + bodies.get(b));
                     if(lifeTotal <=3) {
                         if(lifeTotal == 3) {
                             liftP3.setVisible(false);
@@ -234,9 +248,11 @@ public class GameplayScreen extends Screen{
 
                     }
 
-                }else  if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == heart.getBody()){
+                }if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == heart.getBody()){
                         System.out.println("contacted Heart.");
                         //System.out.println("life total = "+ lifeTotal);
+                        b.setActive(false);
+                        delete.add(b);
                         if(lifeTotal <=3 && checkLifeFull == false){
                             if(lifeTotal == 1){
                                 lifeTotal++;
@@ -267,7 +283,7 @@ public class GameplayScreen extends Screen{
                                 liftP2.setVisible(true);
                                 liftP3.setVisible(true);
                             }
-                        }else if(lifeTotal == 3 && checkLifeFull == true){
+                        }if(lifeTotal == 3 && checkLifeFull == true){
                             System.out.println("Life Max.");
                         }
                     System.out.println("life total = "+ lifeTotal);
@@ -294,14 +310,6 @@ public class GameplayScreen extends Screen{
             }
         });
 
-        //////////////
-
-        this.layer.add(rocket.layer());
-        this.layer.add(coin.layer());
-        this.layer.add(ufo.layer());
-        this.layer.add(heart.layer());
-
-        //
 
         keyboard().setListener((new Keyboard.Adapter(){
             @Override
@@ -344,11 +352,11 @@ public class GameplayScreen extends Screen{
             debugDraw.setStrokeAlpha(150);
             debugDraw.setFillAlpha(75);
             debugDraw.setStrokeWidth(2.0f);
-        /*    debugDraw.setFlags(
+            debugDraw.setFlags(
                             DebugDraw.e_shapeBit |
                             DebugDraw.e_jointBit
                      //DebugDraw.e_aabbBit
-            ); */
+            );
 
             debugDraw.setCamera(0,0,1f / GraGame.M_PER_PIXEL);
             world.setDebugDraw(debugDraw);
@@ -381,11 +389,14 @@ public class GameplayScreen extends Screen{
     public void update(int delta) {
         super.update(delta);
         rocket.update(delta);  //<< start
-        coin.update(delta);
+        //coin.update(delta);
         ufo.update(delta);
         heart.update(delta);
 
-        //while (delete.size() > 0) world.destroyBody(delete.remove(0));
+        while (delete.size() > 0) {
+            layer.get(9).destroy();
+            world.destroyBody(delete.remove(0));
+        }
         //for(Rocket z: zealotMap){
         //    this.layer.add(z.layer());
         //    z.update(delta);
@@ -402,9 +413,10 @@ public class GameplayScreen extends Screen{
     public void paint(Clock clock) {
         super.paint(clock);
         rocket.paint(clock); //<<  start
-        coin.paint(clock);
+        //coin.paint(clock);
         ufo.paint(clock);
         heart.paint(clock);
+
         //System.out.println("mouse x = " + mouse_x);
         //System.out.println("mouse y = " + mouse_y);
 
@@ -423,7 +435,8 @@ public class GameplayScreen extends Screen{
             debugDraw.getCanvas().clear();
             world.drawDebugData();
             debugDraw.getCanvas().setFillColor(Color.rgb(255,255,255));
-            debugDraw.getCanvas().drawText(debugString,100,100);
+            //debugDraw.getCanvas().drawText(debugString,100,100);
+
         }
     }
 }
