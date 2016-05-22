@@ -86,7 +86,7 @@ public class Heart {
 
     private Body initPhysicsBody(World world, float x, float y){  //<< Start
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyType.STATIC;
+        bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(0, 0);
         Body body = world.createBody(bodyDef);
 
