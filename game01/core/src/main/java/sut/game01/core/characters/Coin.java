@@ -8,7 +8,6 @@ import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 import sut.game01.core.GameplayScreen;
-import sut.game01.core.GraGame;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 
@@ -45,7 +44,7 @@ public class Coin {
                 sprite.setSprite(spriteIndex);
                 sprite.layer().setOrigin(sprite.width() / 2f, sprite.height() / 2f);
                 sprite.layer().setTranslation(x,y + 3f);  //<<
-                body = initPhysicsBody(world, GraGame.M_PER_PIXEL * x, GraGame.M_PER_PIXEL * y);  //<<
+                body = initPhysicsBody(world, GameplayScreen.M_PER_PIXEL * x, GameplayScreen.M_PER_PIXEL * y);  //<<
                 hasLoaded = true;
             }
 
@@ -77,8 +76,8 @@ public class Coin {
 
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
-            sprite.layer().setTranslation(body.getPosition().x / GraGame.M_PER_PIXEL + 1,  //<<
-                    body.getPosition().y / GraGame.M_PER_PIXEL);  //<<
+            sprite.layer().setTranslation(body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1,  //<<
+                    body.getPosition().y / GameplayScreen.M_PER_PIXEL);  //<<
             e = 0;
         }
         sprite.layer().setTranslation(x,y); //<<
@@ -91,8 +90,8 @@ public class Coin {
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(60 * GraGame.M_PER_PIXEL/2,
-                sprite.layer().height()*GraGame.M_PER_PIXEL / 2);
+        shape.setAsBox(60 * GameplayScreen.M_PER_PIXEL/2,
+                sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
 
         GameplayScreen.bodies.put(body, "Coin > " + GameplayScreen.checkC );
         GameplayScreen.checkC++;
@@ -121,8 +120,8 @@ public class Coin {
         if(!hasLoaded) return;
 
         sprite.layer().setTranslation(
-                (body.getPosition().x / GraGame.M_PER_PIXEL + 1),
-                body.getPosition().y / GraGame.M_PER_PIXEL);
+                (body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1),
+                body.getPosition().y / GameplayScreen.M_PER_PIXEL);
         //sprite.layer().setRotation(body.getAngle());
     }  //<< end
 }
