@@ -20,11 +20,11 @@ public class HomeGame extends Screen{
     private final ImageLayer musicOn_bt;
     private final ImageLayer info_bt;
     private final ImageLayer logo_font;
-    private final ImageLayer gameovertest;
+
 
     private final LevelSelect lvselect;
     private final GameOver gameover;
-    private final TestScreen test;
+    //private final TestScreen test;
     private final ScreenStack ss;
 
     public HomeGame (final ScreenStack ss){
@@ -33,7 +33,7 @@ public class HomeGame extends Screen{
         this.ss = ss;
         this.lvselect = new LevelSelect(ss);
         this.gameover = new GameOver(ss);
-        this.test = new TestScreen(ss);
+        //this.test = new TestScreen(ss);
 
         Image bgImage = assets().getImage("images/bgHome.png");
         this.bg = graphics().createImageLayer(bgImage);
@@ -67,9 +67,7 @@ public class HomeGame extends Screen{
         this.logo_font = graphics().createImageLayer(logoImage);
         logo_font.setTranslation(350,320);
 
-        Image gameoverTest = assets().getImage("images/gameovertest.png");
-        this.gameovertest = graphics().createImageLayer(gameoverTest);
-        gameovertest.setTranslation(350,10);
+
 
 
 
@@ -129,15 +127,7 @@ public class HomeGame extends Screen{
         });
 
 
-        gameovertest.addListener(new Mouse.LayerAdapter() {
 
-            @Override
-            public void onMouseUp(Mouse.ButtonEvent event) {
-                ss.push(gameover);
-            }
-
-
-        });
     }
 
 
@@ -156,7 +146,7 @@ public class HomeGame extends Screen{
         //this.layer.add(musicOn_bt);
         this.layer.add(info_bt);
         this.layer.add(logo_font);
-        this.layer.add(gameovertest);
+
         //this.layer.add(bBT);
     }
 

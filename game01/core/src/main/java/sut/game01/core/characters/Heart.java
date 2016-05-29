@@ -8,7 +8,6 @@ import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 import sut.game01.core.GameplayScreen;
-import sut.game01.core.GraGame;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 
@@ -18,10 +17,10 @@ public class Heart {
     private boolean hasLoaded = false;
 
     public enum State {
-        IDLE, Go, RIGHT
+        IDLE, DELETE, RIGHT
     };
 
-    public State state = State.IDLE;
+    public static State state = State.IDLE;
 
     private int e = 0;
     private int offset = 0; //chang Here
@@ -45,7 +44,7 @@ public class Heart {
                 sprite.setSprite(spriteIndex);
                 sprite.layer().setOrigin(sprite.width() / 2f, sprite.height() / 2f);
                 sprite.layer().setTranslation(x,y + 3f);  //<<
-                body = initPhysicsBody(world, GraGame.M_PER_PIXEL * x, GraGame.M_PER_PIXEL * y);  //<<
+                body = initPhysicsBody(world, GameplayScreen.M_PER_PIXEL * x, GameplayScreen.M_PER_PIXEL * y);  //<<
                 hasLoaded = true;
             }
 
@@ -70,15 +69,15 @@ public class Heart {
 
             switch (state){
                 case IDLE: offset = 0; break;
-                case Go: offset = 4; break;
+                case DELETE: offset = 4; break;
                 case RIGHT: offset = 8; break;
 
             }
 
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
-            sprite.layer().setTranslation(body.getPosition().x / GraGame.M_PER_PIXEL + 1,  //<<
-                    body.getPosition().y / GraGame.M_PER_PIXEL);  //<<
+            sprite.layer().setTranslation(body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1,  //<<
+                    body.getPosition().y / GameplayScreen.M_PER_PIXEL);  //<<
             e = 0;
         }
         sprite.layer().setTranslation(x,y); //<<
@@ -91,10 +90,10 @@ public class Heart {
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(33 * GraGame.M_PER_PIXEL/2,
-                sprite.layer().height()*GraGame.M_PER_PIXEL / 2);
-        GameplayScreen.bodies.put(body, "Heart > " + GameplayScreen.checkR );
-        GameplayScreen.checkR++;
+        shape.setAsBox(33 * GameplayScreen.M_PER_PIXEL/2,
+                sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
+        GameplayScreen.bodies.put(body, "Heart" );
+        //GameplayScreen.checkR++;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
@@ -119,8 +118,15 @@ public class Heart {
         if(!hasLoaded) return;
 
         sprite.layer().setTranslation(
-                (body.getPosition().x / GraGame.M_PER_PIXEL + 1),
-                body.getPosition().y / GraGame.M_PER_PIXEL);
+                (body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1),
+                body.getPosition().y / GameplayScreen.M_PER_PIXEL);
         //sprite.layer().setRotation(body.getAngle());
     }  //<< end
+
+    public void setState (State state){
+        this.state = state;
+    }
+    public State getState(){
+        return state;
+    }
 }
