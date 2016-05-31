@@ -3,6 +3,7 @@ package sut.game01.core.characters;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.Layer;
 import playn.core.PlayN;
 import playn.core.util.Callback;
@@ -15,6 +16,9 @@ public class Ufo2 {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
+    private boolean checkDestroy = false;
+    private World world;
+
 
     public enum State {
         IDLE, DIE, RIGHT
@@ -35,6 +39,7 @@ public class Ufo2 {
 
         this.x = _x; //<<
         this.y = _y; //<<
+        this.world = world;
 
         sprite = SpriteLoader.getSprite("images/ufo.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -64,14 +69,29 @@ public class Ufo2 {
     public void update(int delta){
         if(hasLoaded == false) return;
 
+
         e += delta;
         if(e > 150) {
 
             switch (state){
                 case IDLE: offset = 0; break;
-                case DIE: offset = 4; break;
-                case RIGHT: offset = 8; break;
+                case DIE: offset = 6; break;
+                case RIGHT: offset = 12; break;
 
+            }
+            if(checkDestroy){
+                //world.destroyBody(body);
+                System.out.println("world destroy work.");
+            }
+
+            if(state == State.DIE){
+                System.out.println(spriteIndex);
+                if(spriteIndex == 11){
+                    //sprite.layer().destroy();
+                    //world.destroyBody(body);
+                    sprite.layer().setVisible(false);
+
+                }
             }
 
             spriteIndex = offset + ((spriteIndex + 1)%6);
@@ -94,7 +114,7 @@ public class Ufo2 {
                 sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
 
         GameplayScreen.bodies.put(body, "UFO_2" );
-        GameplayScreen.checkC++;
+
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -115,6 +135,15 @@ public class Ufo2 {
     public Body getBody() {
         return body;
     }
+
+    /*public void contact(Contact contact,String s,Ufo2 ufo2){
+
+        checkDestroy = true;
+        //GameplayScreen.deleteUfo2.add(ufo2);
+        System.out.println("metheod contact work.");
+
+    }
+    */
 
 
     public void paint(Clock clock){

@@ -73,8 +73,13 @@ public class Heart {
                 case RIGHT: offset = 8; break;
 
             }
+            if(state == State.DELETE){
+                if(spriteIndex == 11){
+                    sprite.layer().destroy();
+                }
+            }
 
-            spriteIndex = offset + ((spriteIndex + 1)%4);
+            spriteIndex = offset + ((spriteIndex + 1)%5);
             sprite.setSprite(spriteIndex);
             sprite.layer().setTranslation(body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1,  //<<
                     body.getPosition().y / GameplayScreen.M_PER_PIXEL);  //<<

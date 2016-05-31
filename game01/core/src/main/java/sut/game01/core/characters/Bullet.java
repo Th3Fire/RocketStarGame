@@ -4,6 +4,7 @@ package sut.game01.core.characters;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
+import org.jbox2d.dynamics.contacts.Contact;
 import playn.core.Layer;
 import playn.core.PlayN;
 import playn.core.util.Callback;
@@ -108,7 +109,6 @@ public class Bullet {
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
-
         body.setLinearDamping(0.2f);
         body.setTransform(new Vec2(x, y), 0f);
 
@@ -119,6 +119,9 @@ public class Bullet {
         return body;
     }
 
+    public void contact (Contact contact, String s){
+
+    }
 
 
     public void paint(Clock clock){
