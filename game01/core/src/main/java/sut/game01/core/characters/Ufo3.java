@@ -99,8 +99,7 @@ public class Ufo3 {
         shape.setAsBox(30 * GameplayScreen.M_PER_PIXEL/2,
                 sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
 
-        GameplayScreen.bodies.put(body, "UFO_2" );
-        GameplayScreen.checkC++;
+        GameplayScreen.bodies.put(body, "UFO_3" + GameplayScreen.checkUfo++);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -109,9 +108,6 @@ public class Ufo3 {
         fixtureDef.restitution = 0f;
         //body.setBullet(true);
         body.createFixture(fixtureDef);
-
-        //body.createFixture(fixtureDef);
-
         body.setLinearDamping(0.2f);
         body.setTransform(new Vec2(x, y), 0f);
 

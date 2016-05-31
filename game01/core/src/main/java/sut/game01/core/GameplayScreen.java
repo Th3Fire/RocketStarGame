@@ -19,6 +19,7 @@ import tripleplay.game.ScreenStack;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import static playn.core.PlayN.*;
 
@@ -45,7 +46,6 @@ public class GameplayScreen extends Screen{
     private DebugDrawBox2D debugDraw;
 
     private static Rocket rocket;
-    //private Coin coin;
     private Ufo2 ufo2;
     private Heart heart;
     private Bullet bullet;
@@ -58,10 +58,20 @@ public class GameplayScreen extends Screen{
 
     public static HashMap<Body, String> bodies  = new HashMap<Body, String>();
     private List<Body> delete = new ArrayList<Body>();
-    static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-    static ArrayList<Bullet> deleteBullet = new ArrayList<Bullet>();
+    //static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+
+
+    private static List<Bullet> bullets;
+
+    private static List<Ufo2> ufos;
+    private static List<Bullet> deleteBullet;
+    private static ArrayList<Ufo2> deleteUfo2;
+    private static List<Heart> hearts;
+
 
     private GroupLayer groupBullet = graphics().createGroupLayer();
+    private GroupLayer groupUfo = graphics().createGroupLayer();
+    private GroupLayer groupHeart = graphics().createGroupLayer();
 
     //private List<Coin> coinMap;
 
@@ -75,8 +85,11 @@ public class GameplayScreen extends Screen{
     private String strScore = "";
     public static int check = -1;
     public static int checkC = -1;
+    public static int checkUfo = 0;
     public static float mouse_x = 0f;
     public static float mouse_y = 0f;
+    public static long time = 0;
+    public static long tempTime = 0;
 
     public GameplayScreen (final ScreenStack ss){
         this.ss = ss;
@@ -88,14 +101,22 @@ public class GameplayScreen extends Screen{
 
 
 
-
+        bullets = new ArrayList<Bullet>();
+        ufos = new ArrayList<Ufo2>();
+        deleteUfo2 = new ArrayList<Ufo2>();
+        deleteBullet = new ArrayList<Bullet>();
+        hearts = new ArrayList<Heart>();
         //coinMap = new ArrayList<Coin>();
 
         rocket = new Rocket(world,320f,480f);  //<<
         //coin = new Coin(world,310f,210f);
         //ufo2 = new Ufo2(world,400f,100f);
-        ufo3 = new Ufo3(world,370f,100f);
+        //ufo3 = new Ufo3(world,370f,100f);
         heart = new Heart(world,100f,100f);
+
+
+
+
 
         Image bgImage = assets().getImage("images/bgGameplay2.png");
         bg = PlayN.graphics().createImageLayer(bgImage);
@@ -140,69 +161,12 @@ public class GameplayScreen extends Screen{
         //this.layer.add(coin.layer());
         //this.layer.add(ufo2.layer());
         this.layer.add(heart.layer());
-        this.layer.add(ufo3.layer());
+        //this.layer.add(ufo3.layer());
         this.layer.add(groupBullet);
+        this.layer.add(groupUfo);
+        this.layer.add(groupHeart);
 
 
-/*
-        PlayN.keyboard().setListener((new Keyboard.Adapter(){
-            @Override
-            public void onKeyUp(Keyboard.Event event) {
-                if(event.key() == Key.UP){
-                    //z.state = Zealot.State.Go;
-
-                }else if(event.key() == Key.RIGHT){
-                    //z.state = Zealot.State.RIGHT;
-                   // z.x = z.x - 1f;
-
-                }else if(event.key() == Key.LEFT){
-                    //z.state = Zealot.State.IDLE;
-                }
-            }
-        }));
-
-        */
-
-/*
-        mouse().setListener(new Mouse.Adapter(){
-            @Override
-            public void onMouseUp(Mouse.ButtonEvent event) {
-/*
-
-                //Rocket ze = new Rocket(world,event.x(),event.y());  //<< start
-
-                //zealotMap.add(ze);
-*/
-                //Coin cc = new Coin(world,event.x(),event.y());
-
-                //coinMap.add(cc);
-
-/*
-                BodyDef bodyDef = new BodyDef();
-                bodyDef.type = BodyType.STATIC;
-                bodyDef.position = new Vec2(event.x() * M_PER_PIXEL,event.y() * M_PER_PIXEL);
-
-                Body body = world.createBody(bodyDef);
-
-                CircleShape shape = new CircleShape();
-                shape.setRadius(0.4f);
-
-                FixtureDef fixtureDef = new FixtureDef();
-                fixtureDef.shape = shape;
-                fixtureDef.density = 0.4f;
-                fixtureDef.friction = 0.1f;
-                fixtureDef.restitution = 1f;
-
-                body.createFixture(fixtureDef);
-                body.setLinearDamping(0.2f);
-
-                bodies.put(coin.getBody(), "Ob_" + i);
-                System.out.println(">>>>"+coin.getBody());
-                i++;
-
-
-            }
-        }); */
 
 
 
@@ -218,6 +182,8 @@ public class GameplayScreen extends Screen{
             @Override
             public void onMouseDown(Mouse.ButtonEvent event) {
                 setBullet();
+                System.out.println("size of bullet = " + bullets.size());
+
                 //if (checkOver == false) {
                     //bullets.add(new Bullet(world, rocket.getBody().getPosition().x * 26.667f, rocket.getBody().getPosition().y * 26.667f + -30f));
                     //System.out.println("clicked.");
@@ -235,7 +201,6 @@ public class GameplayScreen extends Screen{
 
 
         ////////////////////contact
-
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
@@ -243,125 +208,80 @@ public class GameplayScreen extends Screen{
                 Body b = contact.getFixtureB().getBody();
                 System.out.println(bodies.get(a) + " contected  " + bodies.get(b));
 
-                for(Bullet bullet: bullets){
-                    if(b == bullet.getBody() && a == ufo3.getBody()){
-                        //ufo3.layer().destroy();
-                        delete.add(a);
-                        delete.add(b);
-                        deleteBullet.add(bullet);
-                    }
-                }
-                if(bodiesB.get(b) == "bullet" && a == ufo3.getBody()){
-                    //System.out.println("set delete " + bodies.get(a));
-                    ufo3.state = Ufo3.State.DIE;
-                    //bullet.state = Bullet.State.Go;
-                    //delete.add(a);
-                    //deleteBullet.add(b);
-                    //a.setActive(false);
-                    //b.setActive(false);
 
-                    //a.setActive(false);
-                    //delete.add(a);
-                }
-               /* if(a == heart.getBody() && bodiesB.get(b).equals("bullet")){
-                    System.out.println("set delete " + bodiesB.get(b));
-                    //b.setActive(false);
-                    //Heart.state = Heart.State.Delete;
-                    delete.add(b);
+                for(Ufo2 ufo2:ufos) {
+                    if(a == ufo2.getBody() )
 
-
-                }*/
-                //System.out.println(bodiesR.get(a) + " contected  " + bodies.get(b));
-
-                /*if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == coin.getBody()){
-                    System.out.println(bodies.get(a) + " and " + bodies.get(b));
-                    score++;
-                    debugString = bodies.get(a) + " contacted with " + bodies.get(b) + " score = " + score;
-                    strScore = ""+score;
-
-                }*/
-                else if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == ufo3.getBody()
-                        || contact.getFixtureA().getBody() == ufo3.getBody() && contact.getFixtureB().getBody() == rocket.getBody()){
-                    //System.out.println(bodies.get(a) + " contected  " + bodies.get(b));
-                    delete.add(b);
-                    ufo3.state = Ufo3.State.DIE;
-                    if(lifeTotal <=3) {
-                        if(lifeTotal == 3) {
-                            liftP3.setVisible(false);
-                            lifeTotal--;
-                            checkLifeFull = false;
-                        }else if (lifeTotal == 2){
-                            liftP2.setVisible(false);
-                            lifeTotal--;
-                            checkLifeFull = false;
-                        }else if (lifeTotal == 1){
-                            liftP.setVisible(false);
-                            lifeTotal--;
-                            checkLifeFull = false;
-                            if(lifeTotal == 0){
+                    if(a == rocket.getBody() && b == ufo2.getBody() || a == ufo2.getBody() && b == rocket.getBody()){
+                        if(a == rocket.getBody()) {
+                            delete.add(b);
+                        }else if(b == rocket.getBody()){
+                            delete.add(a);
+                        }
+                        ufo2.state = Ufo2.State.DIE;
+                        if(lifeTotal <=3) {
+                            if(lifeTotal == 3) {
+                                liftP3.setVisible(false);
+                                lifeTotal--;
+                                checkLifeFull = false;
+                            }else if (lifeTotal == 2){
+                                liftP2.setVisible(false);
+                                lifeTotal--;
+                                checkLifeFull = false;
+                            }else if (lifeTotal == 1){
+                                liftP.setVisible(false);
+                                lifeTotal--;
+                                checkLifeFull = false;
+                                if(lifeTotal == 0){
+                                    ss.push(new GameOver(ss));
+                                    lifeTotal = 3;
+                                    checkLifeFull = false;
+                                }
+                            }else if(lifeTotal == 0){
                                 ss.push(new GameOver(ss));
                                 lifeTotal = 3;
                                 checkLifeFull = false;
                             }
-                        }else if(lifeTotal == 0){
-                            ss.push(new GameOver(ss));
-                            lifeTotal = 3;
-                            checkLifeFull = false;
-                        }
-                        System.out.println("life total = " + lifeTotal);
+                            System.out.println("life total = " + lifeTotal);
 
+                        }
                     }
 
-                }else if(contact.getFixtureA().getBody() == rocket.getBody() && contact.getFixtureB().getBody() == heart.getBody()
-                         ){
-                    //System.out.println(bodies.get(a) + " contected  " + bodies.get(b));
-                    //System.out.println("life total = "+ lifeTotal);
-                    //b.setActive(false);
-                    delete.add(b);
-                    if(lifeTotal <=3 && checkLifeFull == false){
-                        if(lifeTotal == 1){
-                            lifeTotal++;
-                        }else if (lifeTotal == 2){
-                            lifeTotal++;
-                            if(lifeTotal == 3){
-                                System.out.println("Life Max.");
-                                checkLifeFull = true;
-
-                            }
-
-                        }else if (lifeTotal == 3){
-
-
-                            System.out.println("Life Max.");
-
+                    for (Bullet bullet : bullets) {
+                        if (a == ufo2.getBody() && b == bullet.getBody() || b == ufo2.getBody() && a == bullet.getBody()) {
+                            //deleteUfo2.add(ufo2);
+                            //deleteBullet.add(bullet);
+                            ufo2.state = Ufo2.State.DIE;
+                            //deleteUfo2.add(ufo2);
+                            delete.add(a);
+                            delete.add(b);
+                            deleteBullet.add(bullet);
+                            //ufo2.contact(contact,"Die",ufo2);
+                            //bullet.contact(contact, "Die");
+                            //System.out.println("destroy work.");
+                            //delete.add(a);
+                            //delete.add(b);
                         }
-                        if(lifeTotal == 1){
-                            liftP.setVisible(true);
-                            liftP2.setVisible(false);
-                            liftP3.setVisible(false);
-                        }else if(lifeTotal == 2){
-                            liftP.setVisible(true);
-                            liftP2.setVisible(true);
-                            liftP3.setVisible(false);
-                        }else if (lifeTotal == 3){
-                            liftP.setVisible(true);
-                            liftP2.setVisible(true);
-                            liftP3.setVisible(true);
-                        }
-                    }if(lifeTotal == 3 && checkLifeFull == true){
-                        System.out.println("Life Max.");
                     }
-                    System.out.println("life total = "+ lifeTotal);
 
-                }
-                // System.out.println(bodies.get(a).substring(0,5));
-                /*if(bodies.get(a).substring(0,5).equals("bullet") ){
-                    System.out.println("B >> << UFO_2");
-                }*/
-                else if(a == rocket.getBody() && bodiesB.get(b).equals("bullet")){
-                    b.applyLinearImpulse( new Vec2(0f,-70f)  , b.getPosition() );
-                }
+                    for (Bullet bullet : bullets) {
+                        if (a == rocket.getBody() && b == bullet.getBody()) {
+                            //deleteUfo2.add(ufo2);
+                            //deleteBullet.add(bullet);
 
+                            //ufo2.contact(contact,"Die",ufo2);
+                            //bullet.contact(contact, "Die");
+                            //System.out.println("destroy work.");
+                            //delete.add(a);
+                            //delete.add(b);
+                        }
+                    }
+                }
+                for(Bullet bullet: bullets) {
+                    if (a == rocket.getBody() && b == bullet.getBody()) {
+                        b.applyLinearImpulse(new Vec2(0f, -70f), b.getPosition());
+                    }
+                }
 
             }
 
@@ -381,38 +301,9 @@ public class GameplayScreen extends Screen{
             }
         });
 
-
         //////////////end contact
 
 
-        keyboard().setListener((new Keyboard.Adapter(){
-            @Override
-            public void onKeyDown(Keyboard.Event event) {
-                if(event.key() == Key.LEFT){
-                    rocket.getBody().applyForce(new Vec2(-100f,0f),rocket.getBody().getPosition());
-                }else if(event.key() == Key.RIGHT) {
-                    rocket.getBody().applyForce(new Vec2(100f, -0f), rocket.getBody().getPosition());
-                }else if(event.key() == Key.SPACE){
-                    rocket.getBody().applyForce(new Vec2(0f, -1000f), rocket.getBody().getPosition());
-
-                }else if(event.key() == Key.ESCAPE){
-                    ss.remove(ss.top());
-                    ss.remove(ss.top());
-
-                }
-            }
-        }));
-
-
-       // for(Rocket z: zealotMap){
-        //    System.out.println("add");
-        //    this.layer.add(z.layer());
-       // }  //<< End
-
-        //for(Coin c: coinMap){
-        //    System.out.println("add");
-        //    this.layer.add(c.layer());
-        //}  //<< End
 
         if(showDebugDraw){
             CanvasImage image = graphics().createImage(
@@ -457,7 +348,7 @@ public class GameplayScreen extends Screen{
         //ground4.createFixture(groundShape4, 0.0f);
 
     }
-public static void setBullet(){
+    public static void setBullet(){
     check++;
     bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f));
     //for (int i =0 ; i <= check ; i++){
@@ -467,6 +358,18 @@ public static void setBullet(){
         //System.out.println(bodies.get(bullets.get(i)));
    // }
 }
+    public static void setUfo(float position){
+        checkUfo++;
+        ufos.add(new Ufo2(world,position,100f));
+       // System.out.println("add ufo");
+        //for (int i =0 ; i <= check ; i++){
+        //  if (i < 1)
+        //graphics().rootLayer().add(bullets.get(i).layer());
+        //bodies.put(bullets.get(i).getBody(),"bullet_" + i);
+        //System.out.println(bodies.get(bullets.get(i)));
+        // }
+    }
+
 
     @Override
     public void update(int delta) {
@@ -474,18 +377,47 @@ public static void setBullet(){
         rocket.update(delta);  //<< start
         //coin.update(delta);
         //ufo2.update(delta);
-        ufo3.update(delta);
+        //ufo3.update(delta);
         heart.update(delta);
+        time++;
 
+        float minX = 10.0f;
+        float maxX = 630.0f;
+        Random random = new Random();
+        float finalX = random.nextFloat()*(maxX - minX) + minX;
+        //System.out.println("random float = " + finalX);
+
+
+        if(time-tempTime == 20){
+            tempTime = time;
+            if(checkUfo != 10) {
+                setUfo(finalX);
+            }
+        }
+
+
+        for(Ufo2 ufo2: ufos){
+            ufo2.update(delta);
+            //groupUfo.add(ufo2.layer());
+            //this.layer.add(ufo2.layer());
+            groupUfo.add(ufo2.layer());
+            //System.out.println("update ufo3 finished");
+        }
 
         for(Bullet bullet: bullets){
             bullet.update(delta);
-        }
-        for(Bullet bullet: bullets){
             groupBullet.add(bullet.layer());
         }
 
+      while (deleteUfo2.size() > 0) {
 
+            deleteUfo2.get(0).getBody().setActive(false);
+            ufos.get(0).layer().destroy();
+            ufos.remove(0);
+            world.destroyBody(deleteUfo2.remove(0).getBody());
+            System.out.println("Deleted ufo");
+
+        }
 
 
         while (deleteBullet.size() > 0) {
@@ -525,13 +457,19 @@ public static void setBullet(){
         rocket.paint(clock); //<<  start
         //coin.paint(clock);
         //ufo2.paint(clock);
-        ufo3.paint(clock);
+        //ufo3.paint(clock);
         heart.paint(clock);
         //for (int i =0 ; i <=1 ; i++){
             //if (i < 1)
         for(Bullet bullet: bullets){
             bullet.paint(clock);
         }
+
+        for (Ufo2 ufo2 : ufos) {
+                ufo2.paint(clock);
+            //System.out.println("Update ufo finished");
+        }
+
 
         //System.out.println("mouse x = " + mouse_x);
         //System.out.println("mouse y = " + mouse_y);
@@ -551,7 +489,7 @@ public static void setBullet(){
             debugDraw.getCanvas().clear();
             world.drawDebugData();
             debugDraw.getCanvas().setFillColor(Color.rgb(255,255,255));
-            //debugDraw.getCanvas().drawText(debugString,100,100);
+            debugDraw.getCanvas().drawText(debugString,540,30);
 
         }
     }
