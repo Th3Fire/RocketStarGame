@@ -142,7 +142,7 @@ public class GameplayScreen3 extends Screen{
         //ufo2 = new Ufo2(world,400f,100f);
         //ufo3 = new Ufo3(world,370f,100f);
         //heart = new Heart(world,100f,100f);
-        line = new line(world,320f,-55f);
+        line = new line(world,320f,-55f,3);
 
         Image bgImage = assets().getImage("images/bgGameplay2.png");
         bg = PlayN.graphics().createImageLayer(bgImage);
@@ -419,7 +419,7 @@ public class GameplayScreen3 extends Screen{
                         if(lifeTotal == 2){
                             liftP3.setVisible(false);
                         }else if(lifeTotal == 1){
-                            liftP.setVisible(false);
+                            liftP2.setVisible(false);
                         }else if(lifeTotal == 0){
                             if(lifeTotal == 0){
                                 FileOutputStream fop = null;

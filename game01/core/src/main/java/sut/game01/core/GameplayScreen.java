@@ -137,7 +137,7 @@ public class GameplayScreen extends Screen{
         //ufo2 = new Ufo2(world,400f,100f);
         //ufo3 = new Ufo3(world,370f,100f);
         //heart = new Heart(world,100f,100f);
-        line = new line(world,320f,-55f);
+        line = new line(world,320f,-75f,1);
 
 
 
@@ -524,6 +524,7 @@ public class GameplayScreen extends Screen{
     }
 
     public static void setBullet(){
+
 
         check++;
     bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f,1));

@@ -81,12 +81,14 @@ public class GameplayScreen2 extends Screen{
     private static ArrayList<Ufo2> deleteUfo2;
     private static List<Heart> hearts;
     private static List<Heart2> heartsList;
+    private static List<Ob> obs;
 
 
 
     private GroupLayer groupBullet = graphics().createGroupLayer();
     private GroupLayer groupUfo = graphics().createGroupLayer();
     private GroupLayer groupHeart = graphics().createGroupLayer();
+    private GroupLayer groupOb = graphics().createGroupLayer();
 
 
     //private List<Coin> coinMap;
@@ -97,6 +99,7 @@ public class GameplayScreen2 extends Screen{
     private int lifeTotal =3;
     private int checkKill = 0;
     private int checkHeart = 0;
+    private int checkOb = 0;
     private int checkTotalUfo = 20;
     private boolean checkLifeFull = false;
 
@@ -109,6 +112,7 @@ public class GameplayScreen2 extends Screen{
     public static float mouse_y = 0f;
     public static long time = 0;
     public static long timeHeart = 0;
+    public static long timeOb = 0;
     public static long tempTime = 0;
     private BufferedWriter writer = null;
 
@@ -129,6 +133,7 @@ public class GameplayScreen2 extends Screen{
         deleteBullet = new ArrayList<Bullet>();
         hearts = new ArrayList<Heart>();
         heartsList = new ArrayList<Heart2>();
+        obs = new ArrayList<Ob>();
         //coinMap = new ArrayList<Coin>();
 
         rocket = new Rocket(world,320f,480f,2);  //<<
@@ -136,7 +141,7 @@ public class GameplayScreen2 extends Screen{
         //ufo2 = new Ufo2(world,400f,100f);
         //ufo3 = new Ufo3(world,370f,100f);
         //heart = new Heart(world,100f,100f);
-        line = new line(world,320f,-55f);
+        line = new line(world,320f,-100f,2);
 
         Image bgImage = assets().getImage("images/bgGameplay2.png");
         bg = PlayN.graphics().createImageLayer(bgImage);
@@ -194,6 +199,7 @@ public class GameplayScreen2 extends Screen{
         this.layer.add(groupBullet);
         this.layer.add(groupUfo);
         this.layer.add(groupHeart);
+        this.layer.add(groupOb);
         this.layer.add(line.layer());
 
         pause_bt.addListener(new Mouse.LayerAdapter(){
@@ -380,10 +386,22 @@ public class GameplayScreen2 extends Screen{
 
 
                 }
+                for(Ob ob:obs){
+                    if( a == line.getBody() && b == ob.getBody()){
+                        b.applyLinearImpulse(new Vec2(0f, 15f), b.getPosition());
+
+
+                   if(a == rocket.getBody() && b == ob.getBody() || a == ob.getBody() && b == rocket.getBody()){
+                       System.out.println("HP -----");
+                   }
+
+                    }
+
+                }
 
                 for (Heart2 heart2: heartsList){
                     if(a == line.getBody() && b == heart2.getBody()){
-                        b.applyLinearImpulse(new Vec2(0f, 10f), b.getPosition());
+                        b.applyLinearImpulse(new Vec2(0f, 15f), b.getPosition());
                     }
                     if(a == rocket.getBody() && b == heart2.getBody()){
 
@@ -484,9 +502,18 @@ public class GameplayScreen2 extends Screen{
         //System.out.println(bodies.get(bullets.get(i)));
         // }
     }
+    public void setOb(float x){
+        int minX = 1;
+        int maxX = 2;
+        Random random = new Random();
+        int finalX = random.nextInt() * (maxX - minX) + minX;
+        obs.add(new Ob(world,x,-95f,2,finalX));
+        System.out.println("added Ob");
+    }
+
     public void setUfo(float position){
 
-        ufos.add(new Ufo2(world,position,-50f,2));
+        ufos.add(new Ufo2(world,position,-70f,2));
         // System.out.println("add ufo");
         //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
@@ -506,7 +533,7 @@ public class GameplayScreen2 extends Screen{
 
     public void setHeart(float x){
 
-        heartsList.add( new Heart2(world,x,-50f));
+        heartsList.add( new Heart2(world,x,-95f));
         System.out.println("added heart");
 
     }
@@ -524,6 +551,7 @@ public class GameplayScreen2 extends Screen{
             line.update(delta);
             time++;
             timeHeart++;
+            timeOb++;
 
             float minX = 10.0f;
             float maxX = 630.0f;
@@ -531,9 +559,18 @@ public class GameplayScreen2 extends Screen{
             float finalX = random.nextFloat() * (maxX - minX) + minX;
 
             float finalXX = random.nextFloat() * (maxX - minX) + minX;
+
+            float finalXXX = random.nextFloat() * (maxX - minX) + minX;
             //System.out.println("random float = " + finalX);
 
+            if(timeOb >= 70){
+                if(checkOb != 3) {
+                    setOb(finalXXX);
+                    checkOb++;
+                    timeOb = 0;
+                }
 
+            }
             if (lifeTotal <= 0) {
                 GameOver();
             }
@@ -554,6 +591,11 @@ public class GameplayScreen2 extends Screen{
                     checkHeart++;
                     timeHeart = 0;
                 }
+            }
+            for (Ob ob: obs){
+                ob.update(delta);
+                groupOb.add(ob.layer());
+
             }
             for (Heart2 heart2 : heartsList) {
                 heart2.update(delta);
@@ -601,6 +643,11 @@ public class GameplayScreen2 extends Screen{
 
         for(Heart2 heart2: heartsList){
             heart2.paint(clock);
+
+        }
+        for (Ob ob: obs){
+            ob.paint(clock);
+
 
         }
         for(Bullet bullet: bullets){
