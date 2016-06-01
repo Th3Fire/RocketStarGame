@@ -10,6 +10,8 @@ import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 import sut.game01.core.GameplayScreen;
+import sut.game01.core.GameplayScreen2;
+import sut.game01.core.GameplayScreen3;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 
@@ -34,13 +36,15 @@ public class Bullet {
     private float x; //<<
     private float y; //<<
     private Body body; //<<
+    private int _index = 1;
 
 
-    public Bullet(final World world, final float _x, final float _y){  //<<
+    public Bullet(final World world, final float _x, final float _y,int index){  //<<
 
         this.x = _x; //<<
         this.y = _y; //<<
         this.world = world;
+        this._index = index;
 
         sprite = SpriteLoader.getSprite("images/bullet.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -111,12 +115,20 @@ public class Bullet {
         bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(200/26.666667f, 200/26.666667f);
         Body body = world.createBody(bodyDef);
-        GameplayScreen.bodies.put(body, "bullet_" + GameplayScreen.check);
-        GameplayScreen.bodiesB.put(body, "bullet");
-
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10 * GameplayScreen.M_PER_PIXEL/2,
-                sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
+        if(_index == 1) {
+            GameplayScreen.bodies.put(body, "bullet_" + GameplayScreen.check);
+            GameplayScreen.bodiesB.put(body, "bullet");
+            shape.setAsBox(10 * GameplayScreen.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen.M_PER_PIXEL / 2);
+        }else if(_index == 2){
+            GameplayScreen2.bodies.put(body, "bullet_" + GameplayScreen2.check);
+            GameplayScreen2.bodiesB.put(body, "bullet");
+            shape.setAsBox(10 * GameplayScreen2.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen2.M_PER_PIXEL / 2);
+        }else if(_index == 3){
+            GameplayScreen3.bodies.put(body, "bullet_" + GameplayScreen3.check);
+            GameplayScreen3.bodiesB.put(body, "bullet");
+            shape.setAsBox(10 * GameplayScreen3.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen3.M_PER_PIXEL / 2);
+        }
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
