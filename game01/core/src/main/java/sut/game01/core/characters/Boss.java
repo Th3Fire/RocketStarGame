@@ -86,8 +86,8 @@ public class Boss {
             }
             if(state == State.Go){
                 if (spriteIndex == 8) {
-                    sprite.layer().destroy();
-                    world.destroyBody(body);
+                    //sprite.layer().destroy();
+                    //world.destroyBody(body);
                     sprite.layer().setVisible(false);
                 }
             }
@@ -111,12 +111,12 @@ public class Boss {
         GameplayScreen3.bodiesB.put(body, "Boss");
 
         CircleShape shape = new CircleShape();
-        shape.setRadius(2);
+        shape.setRadius(3);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 10.0f;
-        fixtureDef.friction = 1f;
-        fixtureDef.restitution = 2f;
+        fixtureDef.density = 20.0f;
+        fixtureDef.friction = 0.2f;
+        fixtureDef.restitution = 4f;
         body.createFixture(fixtureDef);
         body.setFixedRotation(true);
         body.setLinearDamping(0.2f);

@@ -33,10 +33,18 @@ import static playn.core.PlayN.*;
  */
 public class GameplayScreen extends Screen{
     private final ScreenStack ss;
+
+
+
     private ImageLayer bg;
     private ImageLayer liftP;
     private ImageLayer liftP2;
     private ImageLayer liftP3;
+    private ImageLayer pause_bt;
+    private ImageLayer play_bt;
+
+    private boolean pause =false;
+
     ToolsG toolsG = new ToolsG();
     public static boolean CheckGetPosition = false;
 
@@ -156,6 +164,8 @@ public class GameplayScreen extends Screen{
 
 
 
+
+
     }
 
     @Override
@@ -168,13 +178,26 @@ public class GameplayScreen extends Screen{
 
         Image shield = assets().getImage("images/shield.png");
         ImageLayer shieldP = PlayN.graphics().createImageLayer(shield);
-        shieldP.setTranslation(225,1);
+        shieldP.setTranslation(180,1);
         this.layer.add(shieldP);
 
         final Image coins = assets().getImage("images/coins.png");
         ImageLayer coinsP = PlayN.graphics().createImageLayer(coins);
-        coinsP.setTranslation(440,1);
+        coinsP.setTranslation(400,1);
         this.layer.add(coinsP);
+
+        Image pauseImage = assets().getImage("images/pause_bt.png");
+        pause_bt = PlayN.graphics().createImageLayer(pauseImage);
+        pause_bt.setTranslation(600,1);
+
+
+        Image playImage = assets().getImage("images/play_bt_b.png");
+        play_bt = PlayN.graphics().createImageLayer(playImage);
+        pause_bt.setTranslation(600,1);
+        this.layer.add(play_bt);
+        this.layer.add(pause_bt);
+
+        play_bt.setVisible(false);
 
         this.layer.add(rocket.layer());
         //this.layer.add(coin.layer());
@@ -187,10 +210,17 @@ public class GameplayScreen extends Screen{
         this.layer.add(line.layer());
 
 
+        pause_bt.addListener(new Mouse.LayerAdapter(){
+            @Override
+            public void onMouseUp(Mouse.ButtonEvent event) {
+                if(pause){
+                    pause = false;
+                }else pause = true;
+                //play_bt.setVisible(true);
+                //pause_bt.setVisible(false);
+            }
+        });
 
-
-
-        ////////// contact
         PlayN.mouse().setListener(new Mouse.Adapter(){
             @Override
             public void onMouseMove(Mouse.MotionEvent event) {
@@ -201,20 +231,22 @@ public class GameplayScreen extends Screen{
 
             @Override
             public void onMouseDown(Mouse.ButtonEvent event) {
-                setBullet();
-                System.out.println("size of bullet = " + bullets.size());
+                if (!pause) {
+                    setBullet();
+                    System.out.println("size of bullet = " + bullets.size());
 
-                //if (checkOver == false) {
+                    //if (checkOver == false) {
                     //bullets.add(new Bullet(world, rocket.getBody().getPosition().x * 26.667f, rocket.getBody().getPosition().y * 26.667f + -30f));
                     //System.out.println("clicked.");
                     //check++;
-                        //graphics().rootLayer().add(bullets.get(check).layer());
-                        //bodies.put(bullets.get(check).getBody(), "bullet_" + check);
+                    //graphics().rootLayer().add(bullets.get(check).layer());
+                    //bodies.put(bullets.get(check).getBody(), "bullet_" + check);
 
-                        //System.out.println(bodies.get(bullets.get(check).getBody()));
+                    //System.out.println(bodies.get(bullets.get(check).getBody()));
 
 
                 }
+            }
             //}
         });
 
@@ -492,7 +524,8 @@ public class GameplayScreen extends Screen{
     }
 
     public static void setBullet(){
-    check++;
+
+        check++;
     bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f,1));
     //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
@@ -535,22 +568,23 @@ public class GameplayScreen extends Screen{
 
     @Override
     public void update(int delta) {
-        super.update(delta);
-        rocket.update(delta);  //<< start
-        //coin.update(delta);
-        //ufo2.update(delta);
-        //ufo3.update(delta);
+        if (!pause) {
+            super.update(delta);
+            rocket.update(delta);  //<< start
+            //coin.update(delta);
+            //ufo2.update(delta);
+            //ufo3.update(delta);
 
-        line.update(delta);
-        time++;
-        timeHeart++;
+            line.update(delta);
+            time++;
+            timeHeart++;
 
-        float minX = 10.0f;
-        float maxX = 630.0f;
-        Random random = new Random();
-        float finalX = random.nextFloat()*(maxX - minX) + minX;
-        float finalXX = random.nextFloat()*(maxX - minX) + minX;
-        //System.out.println("random float = " + finalX);
+            float minX = 10.0f;
+            float maxX = 630.0f;
+            Random random = new Random();
+            float finalX = random.nextFloat() * (maxX - minX) + minX;
+            float finalXX = random.nextFloat() * (maxX - minX) + minX;
+            //System.out.println("random float = " + finalX);
 /*
         if(lifeTotal <= 0){
             GameOver();
@@ -560,61 +594,63 @@ public class GameplayScreen extends Screen{
         }
         */
 
-        if(time >= 20){
-            if(checkUfo != 10) {
-                setUfo(finalX);
-                checkUfo++;
-                time = 0;
+            if (time >= 20) {
+                if (checkUfo != 10) {
+                    setUfo(finalX);
+                    checkUfo++;
+                    time = 0;
+                }
             }
-        }
 
-        if(timeHeart >= 150){
-            if(checkHeart != 5) {
-                setHeart(finalXX);
-                checkHeart++;
-                timeHeart = 0;
+            if (timeHeart >= 150) {
+                if (checkHeart != 5) {
+                    setHeart(finalXX);
+                    checkHeart++;
+                    timeHeart = 0;
+                }
             }
-        }
 
-        for(Heart2 heart2: heartsList){
-            heart2.update(delta);
-            groupHeart.add(heart2.layer());
-        }
+            for (Heart2 heart2 : heartsList) {
+                heart2.update(delta);
+                groupHeart.add(heart2.layer());
+            }
 
-        for(Ufo2 ufo2: ufos){
-            ufo2.update(delta);
-            groupUfo.add(ufo2.layer());
-        }
+            for (Ufo2 ufo2 : ufos) {
+                ufo2.update(delta);
+                groupUfo.add(ufo2.layer());
+            }
 
-        for(Bullet bullet: bullets){
-            bullet.update(delta);
-            groupBullet.add(bullet.layer());
-        }
+            for (Bullet bullet : bullets) {
+                bullet.update(delta);
+                groupBullet.add(bullet.layer());
+            }
 
-      while (deleteUfo2.size() > 0) {
-            deleteUfo2.get(0).getBody().setActive(false);
-            ufos.get(0).layer().destroy();
-            ufos.remove(0);
-            world.destroyBody(deleteUfo2.remove(0).getBody());
-            System.out.println("Deleted ufo");
+            while (deleteUfo2.size() > 0) {
+                deleteUfo2.get(0).getBody().setActive(false);
+                ufos.get(0).layer().destroy();
+                ufos.remove(0);
+                world.destroyBody(deleteUfo2.remove(0).getBody());
+                System.out.println("Deleted ufo");
+            }
+            while (deleteBullet.size() > 0) {
+                deleteBullet.get(0).getBody().setActive(false);
+                bullets.get(0).layer().destroy();
+                bullets.remove(0);
+                world.destroyBody(deleteBullet.remove(0).getBody());
+                System.out.print("Deleted bullet");
+            }
+            while (delete.size() > 0) {
+                delete.get(0).setActive(false);
+                //layer.get(0).destroy();
+                world.destroyBody(delete.remove(0));
+            }
+            world.step(0.033f, 10, 10);
         }
-        while (deleteBullet.size() > 0) {
-            deleteBullet.get(0).getBody().setActive(false);
-            bullets.get(0).layer().destroy();
-            bullets.remove(0);
-            world.destroyBody(deleteBullet.remove(0).getBody());
-            System.out.print("Deleted bullet");
-        }
-        while (delete.size() > 0) {
-            delete.get(0).setActive(false);
-            //layer.get(0).destroy();
-            world.destroyBody(delete.remove(0));
-        }
-        world.step(0.033f, 10, 10);
     }
 
     @Override
     public void paint(Clock clock) {
+
         super.paint(clock);
         rocket.paint(clock);
 
@@ -636,7 +672,7 @@ public class GameplayScreen extends Screen{
             world.drawDebugData();
             debugDraw.getCanvas().setFillColor(Color.rgb(255,255,255));
         }
-        debugDraw.getCanvas().drawText(debugString,540,30);
-        debugDraw.getCanvas().drawText("Chapter 1",2,470);
+        debugDraw.getCanvas().drawText(debugString,510,30);
+        debugDraw.getCanvas().drawText("Chapter : 1",2,470);
     }
 }
