@@ -1,5 +1,7 @@
 package sut.game01.core.characters;
 
+
+import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
@@ -9,21 +11,19 @@ import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 import sut.game01.core.GameplayScreen;
-import sut.game01.core.GameplayScreen2;
 import sut.game01.core.GameplayScreen3;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 
-public class Ufo2 {
+public class Boss {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
-    private boolean checkDestroy = false;
+    private int checkDestroy = 0;
     private World world;
 
-
     public enum State {
-        IDLE, DIE, RIGHT
+        IDLE, Go, RIGHT
     };
 
     public State state = State.IDLE;
@@ -36,16 +36,15 @@ public class Ufo2 {
     private float x; //<<
     private float y; //<<
     private Body body; //<<
-    private int _index = 1;
 
-    public Ufo2(final World world, final float _x, final float _y,int index){  //<<
+
+    public Boss(final World world, final float _x, final float _y){  //<<
 
         this.x = _x; //<<
         this.y = _y; //<<
         this.world = world;
-        this._index = index;
 
-        sprite = SpriteLoader.getSprite("images/ufo.json");
+        sprite = SpriteLoader.getSprite("images/boss.json");
         sprite.addCallback(new Callback<Sprite>() {
             @Override
             public void onSuccess(Sprite result) {
@@ -54,6 +53,7 @@ public class Ufo2 {
                 sprite.layer().setOrigin(sprite.width() / 2f, sprite.height() / 2f);
                 sprite.layer().setTranslation(x,y + 3f);  //<<
                 body = initPhysicsBody(world, GameplayScreen.M_PER_PIXEL * x, GameplayScreen.M_PER_PIXEL * y);  //<<
+
                 hasLoaded = true;
             }
 
@@ -74,31 +74,26 @@ public class Ufo2 {
         if(hasLoaded == false) return;
 
 
+
         e += delta;
         if(e > 150) {
 
             switch (state){
                 case IDLE: offset = 0; break;
-                case DIE: offset = 6; break;
-                case RIGHT: offset = 12; break;
+                case Go: offset = 4; break;
+                case RIGHT: offset = 8; break;
 
             }
-            if(checkDestroy){
-                //world.destroyBody(body);
-                System.out.println("world destroy work.");
-            }
-
-            if(state == State.DIE){
-
-                if(spriteIndex == 11){
-                    //sprite.layer().destroy();
-                    //world.destroyBody(body);
+            if(state == State.Go){
+                if (spriteIndex == 8) {
+                    sprite.layer().destroy();
+                    world.destroyBody(body);
                     sprite.layer().setVisible(false);
-
                 }
             }
 
-            spriteIndex = offset + ((spriteIndex + 1)%6);
+
+            spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
             sprite.layer().setTranslation(body.getPosition().x / GameplayScreen.M_PER_PIXEL + 1,  //<<
                     body.getPosition().y / GameplayScreen.M_PER_PIXEL);  //<<
@@ -112,34 +107,18 @@ public class Ufo2 {
         bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(200/26.666667f, 200/26.666667f);
         Body body = world.createBody(bodyDef);
-        PolygonShape shape = new PolygonShape();
+        GameplayScreen3.bodies.put(body, "Boss" + GameplayScreen3.check);
+        GameplayScreen3.bodiesB.put(body, "Boss");
 
-        if(_index == 1) {
-            GameplayScreen.bodies.put(body, "ufo2_" );
-            GameplayScreen.bodiesB.put(body, "ufo2");
-            shape.setAsBox(30 * GameplayScreen.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen.M_PER_PIXEL / 2);
-        }else if(_index == 2){
-            GameplayScreen2.bodies.put(body, "ufo2_" );
-            GameplayScreen2.bodiesB.put(body, "ufo2");
-            shape.setAsBox(30 * GameplayScreen2.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen2.M_PER_PIXEL / 2);
-        }else if(_index == 3){
-            GameplayScreen3.bodies.put(body, "ufo2_");
-            GameplayScreen3.bodiesB.put(body, "ufo2");
-            shape.setAsBox(30 * GameplayScreen3.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen3.M_PER_PIXEL / 2);
-        }
-
-
+        CircleShape shape = new CircleShape();
+        shape.setRadius(2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.1f;
-        fixtureDef.restitution = 0f;
-        fixtureDef.filter.groupIndex = -1;
-        //body.setBullet(true);
+        fixtureDef.density = 10.0f;
+        fixtureDef.friction = 1f;
+        fixtureDef.restitution = 2f;
         body.createFixture(fixtureDef);
-
-        //body.createFixture(fixtureDef);
-
+        body.setFixedRotation(true);
         body.setLinearDamping(0.2f);
         body.setTransform(new Vec2(x, y), 0f);
 
@@ -150,14 +129,9 @@ public class Ufo2 {
         return body;
     }
 
-    /*public void contact(Contact contact,String s,Ufo2 ufo2){
-
-        checkDestroy = true;
-        //GameplayScreen.deleteUfo2.add(ufo2);
-        System.out.println("metheod contact work.");
+    public void contact (Contact contact, String s){
 
     }
-    */
 
 
     public void paint(Clock clock){

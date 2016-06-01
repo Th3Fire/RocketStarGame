@@ -493,7 +493,7 @@ public class GameplayScreen extends Screen{
 
     public static void setBullet(){
     check++;
-    bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f));
+    bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f,1));
     //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
         //graphics().rootLayer().add(bullets.get(i).layer());
@@ -503,7 +503,7 @@ public class GameplayScreen extends Screen{
 }
     public static void setUfo(float position){
 
-        ufos.add(new Ufo2(world,position,-50f));
+        ufos.add(new Ufo2(world,position,-50f,1));
        // System.out.println("add ufo");
         //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
@@ -549,6 +549,7 @@ public class GameplayScreen extends Screen{
         float maxX = 630.0f;
         Random random = new Random();
         float finalX = random.nextFloat()*(maxX - minX) + minX;
+        float finalXX = random.nextFloat()*(maxX - minX) + minX;
         //System.out.println("random float = " + finalX);
 /*
         if(lifeTotal <= 0){
@@ -569,7 +570,7 @@ public class GameplayScreen extends Screen{
 
         if(timeHeart >= 150){
             if(checkHeart != 5) {
-                setHeart(finalX);
+                setHeart(finalXX);
                 checkHeart++;
                 timeHeart = 0;
             }

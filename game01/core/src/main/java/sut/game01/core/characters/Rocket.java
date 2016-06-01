@@ -37,13 +37,14 @@ public class Rocket extends Screen{
     private float y; //<<
     private Body body; //<<
     private Bullet bullet;
-
+    private int _index = 1;
 
     public Rocket(final World world,final float _x, final float _y,int index){  //<<
         this.world = world;
         this.x = GameplayScreen.mouse_x; //<<
         this.y = GameplayScreen.mouse_y; //<<
         this.checkIndex = index;
+        this._index = index;
         if(index == 1){
 
         }
@@ -102,9 +103,19 @@ public class Rocket extends Screen{
         Body body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(33 * GameplayScreen.M_PER_PIXEL/2,
-                sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
-        GameplayScreen.bodies.put(body, "Rocket");
+        if(_index == 1) {
+            GameplayScreen.bodies.put(body, "Rocket" + GameplayScreen.check);
+            GameplayScreen.bodiesB.put(body, "Rocket");
+            shape.setAsBox(10 * GameplayScreen.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen.M_PER_PIXEL / 2);
+        }else if(_index == 2){
+            GameplayScreen2.bodies.put(body, "Rocket" + GameplayScreen2.check);
+            GameplayScreen2.bodiesB.put(body, "Rocket");
+            shape.setAsBox(10 * GameplayScreen2.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen2.M_PER_PIXEL / 2);
+        }else if(_index == 3){
+            GameplayScreen3.bodies.put(body, "Rocket" + GameplayScreen3.check);
+            GameplayScreen3.bodiesB.put(body, "Rocket");
+            shape.setAsBox(10 * GameplayScreen3.M_PER_PIXEL / 2, sprite.layer().height() * GameplayScreen3.M_PER_PIXEL / 2);
+        }
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

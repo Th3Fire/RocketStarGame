@@ -53,6 +53,7 @@ public class GameplayScreen2 extends Screen{
     private static Rocket rocket;
     private Ufo2 ufo2;
     private Heart heart;
+    private Heart2 heart2;
     private Bullet bullet;
     private Ufo3 ufo3;
     private line line;
@@ -73,19 +74,23 @@ public class GameplayScreen2 extends Screen{
     private static List<Bullet> deleteBullet;
     private static ArrayList<Ufo2> deleteUfo2;
     private static List<Heart> hearts;
+    private static List<Heart2> heartsList;
+
 
 
     private GroupLayer groupBullet = graphics().createGroupLayer();
     private GroupLayer groupUfo = graphics().createGroupLayer();
     private GroupLayer groupHeart = graphics().createGroupLayer();
 
+
     //private List<Coin> coinMap;
 
 
-    private int i = 0;
+
     private int score = 0;
     private int lifeTotal =3;
     private int checkKill = 0;
+    private int checkHeart = 0;
     private int checkTotalUfo = 20;
     private boolean checkLifeFull = false;
 
@@ -97,6 +102,7 @@ public class GameplayScreen2 extends Screen{
     public static float mouse_x = 0f;
     public static float mouse_y = 0f;
     public static long time = 0;
+    public static long timeHeart = 0;
     public static long tempTime = 0;
     private BufferedWriter writer = null;
 
@@ -116,13 +122,14 @@ public class GameplayScreen2 extends Screen{
         deleteUfo2 = new ArrayList<Ufo2>();
         deleteBullet = new ArrayList<Bullet>();
         hearts = new ArrayList<Heart>();
+        heartsList = new ArrayList<Heart2>();
         //coinMap = new ArrayList<Coin>();
 
         rocket = new Rocket(world,320f,480f,2);  //<<
         //coin = new Coin(world,310f,210f);
         //ufo2 = new Ufo2(world,400f,100f);
         //ufo3 = new Ufo3(world,370f,100f);
-        heart = new Heart(world,100f,100f);
+        //heart = new Heart(world,100f,100f);
         line = new line(world,320f,-55f);
 
         Image bgImage = assets().getImage("images/bgGameplay2.png");
@@ -163,7 +170,7 @@ public class GameplayScreen2 extends Screen{
         this.layer.add(rocket.layer());
         //this.layer.add(coin.layer());
         //this.layer.add(ufo2.layer());
-        this.layer.add(heart.layer());
+        //this.layer.add(heart.layer());
         //this.layer.add(ufo3.layer());
         this.layer.add(groupBullet);
         this.layer.add(groupUfo);
@@ -345,19 +352,31 @@ public class GameplayScreen2 extends Screen{
 
                     }
 
-                    for (Bullet bullet : bullets) {
-                        if (a == rocket.getBody() && b == bullet.getBody()) {
-                            //deleteUfo2.add(ufo2);
-                            //deleteBullet.add(bullet);
 
-                            //ufo2.contact(contact,"Die",ufo2);
-                            //bullet.contact(contact, "Die");
-                            //System.out.println("destroy work.");
-                            //delete.add(a);
-                            //delete.add(b);
-                        }
-                    }
                 }
+
+                for (Heart2 heart2: heartsList){
+                    if(a == line.getBody() && b == heart2.getBody()){
+                        b.applyLinearImpulse(new Vec2(0f, 10f), b.getPosition());
+                    }
+                    if(a == rocket.getBody() && b == heart2.getBody()){
+
+                        if(lifeTotal <=2) {
+                            lifeTotal++;
+                            if(lifeTotal == 2){
+                                liftP2.setVisible(true);
+                            }else if(lifeTotal == 3){
+                                liftP3.setVisible(true);
+                            }
+                        }
+
+                        heart2.state = Heart2.State.DIE;
+                        delete.add(b);
+                        System.out.println("total life = " + lifeTotal);
+                    }
+
+                }
+
                 for(Bullet bullet: bullets) {
                     if (a == rocket.getBody() && b == bullet.getBody()) {
                         b.applyLinearImpulse(new Vec2(0f, -30f), b.getPosition());
@@ -431,7 +450,7 @@ public class GameplayScreen2 extends Screen{
     }
     public static void setBullet(){
         check++;
-        bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f));
+        bullets.add( new Bullet(world,rocket.getBody().getPosition().x*26.667f,rocket.getBody().getPosition().y*26.667f + -30f,2));
         //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
         //graphics().rootLayer().add(bullets.get(i).layer());
@@ -439,9 +458,9 @@ public class GameplayScreen2 extends Screen{
         //System.out.println(bodies.get(bullets.get(i)));
         // }
     }
-    public static void setUfo(float position){
+    public void setUfo(float position){
 
-        ufos.add(new Ufo2(world,position,-50f));
+        ufos.add(new Ufo2(world,position,-50f,2));
         // System.out.println("add ufo");
         //for (int i =0 ; i <= check ; i++){
         //  if (i < 1)
@@ -459,6 +478,13 @@ public class GameplayScreen2 extends Screen{
         ss.push(new GameOver(ss,2));
     }
 
+    public void setHeart(float x){
+
+        heartsList.add( new Heart2(world,x,-50f));
+        System.out.println("added heart");
+
+    }
+
 
     @Override
     public void update(int delta) {
@@ -467,15 +493,19 @@ public class GameplayScreen2 extends Screen{
         //coin.update(delta);
         //ufo2.update(delta);
         //ufo3.update(delta);
-        heart.update(delta);
+        //heart.update(delta);
         line.update(delta);
         time++;
+        timeHeart++;
 
         float minX = 10.0f;
         float maxX = 630.0f;
         Random random = new Random();
         float finalX = random.nextFloat()*(maxX - minX) + minX;
+
+        float finalXX = random.nextFloat()*(maxX - minX) + minX;
         //System.out.println("random float = " + finalX);
+
 
         if(lifeTotal <= 0) {
             GameOver();
@@ -491,6 +521,18 @@ public class GameplayScreen2 extends Screen{
                 time = 0;
             }
         }
+        if(timeHeart >= 150){
+            if(checkHeart != 3) {
+                setHeart(finalXX);
+                checkHeart++;
+                timeHeart = 0;
+            }
+        }
+        for(Heart2 heart2: heartsList){
+            heart2.update(delta);
+            groupHeart.add(heart2.layer());
+        }
+
         for(Ufo2 ufo2: ufos){
             ufo2.update(delta);
             groupUfo.add(ufo2.layer());
@@ -527,9 +569,13 @@ public class GameplayScreen2 extends Screen{
     public void paint(Clock clock) {
         super.paint(clock);
         rocket.paint(clock);
-        heart.paint(clock);
+        //heart.paint(clock);
         line.paint(clock);
 
+        for(Heart2 heart2: heartsList){
+            heart2.paint(clock);
+
+        }
         for(Bullet bullet: bullets){
             bullet.paint(clock);
         }
