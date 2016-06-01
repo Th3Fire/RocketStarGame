@@ -74,8 +74,9 @@ public class Heart {
 
             }
             if(state == State.DELETE){
-                if(spriteIndex == 11){
-                    sprite.layer().destroy();
+                if(spriteIndex == 8){
+                    sprite.layer().setVisible(false);
+                    //sprite.layer().destroy();
                 }
             }
 
@@ -97,7 +98,7 @@ public class Heart {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(33 * GameplayScreen.M_PER_PIXEL/2,
                 sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
-        GameplayScreen.bodies.put(body, "Heart" );
+        GameplayScreen.bodies.put(body, "Heart_" );
         //GameplayScreen.checkR++;
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

@@ -3,18 +3,16 @@ package sut.game01.core.characters;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.*;
-import playn.core.Keyboard;
 import playn.core.Layer;
-import playn.core.Mouse;
 import playn.core.PlayN;
 import playn.core.util.Callback;
 import playn.core.util.Clock;
 import sut.game01.core.GameplayScreen;
+import sut.game01.core.GameplayScreen2;
+import sut.game01.core.GameplayScreen3;
 import sut.game01.core.sprite.Sprite;
 import sut.game01.core.sprite.SpriteLoader;
 import tripleplay.game.Screen;
-
-import static playn.core.PlayN.*;
 
 public class Rocket extends Screen{
 
@@ -22,6 +20,7 @@ public class Rocket extends Screen{
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
     private World world;
+    private int checkIndex = 1;
 
     public enum State {
         IDLE, Go, RIGHT
@@ -39,10 +38,15 @@ public class Rocket extends Screen{
     private Body body; //<<
     private Bullet bullet;
 
-    public Rocket(final World world,final float _x, final float _y){  //<<
+
+    public Rocket(final World world,final float _x, final float _y,int index){  //<<
         this.world = world;
         this.x = GameplayScreen.mouse_x; //<<
         this.y = GameplayScreen.mouse_y; //<<
+        this.checkIndex = index;
+        if(index == 1){
+
+        }
 
         sprite = SpriteLoader.getSprite("images/rocket.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -123,13 +127,26 @@ public class Rocket extends Screen{
     }
 
 
-    public void paint(Clock clock){
-        if(!hasLoaded) return;
-
-        sprite.layer().setTranslation(
-                (GameplayScreen.mouse_x ),
-                GameplayScreen.mouse_y );
-        body.setTransform(new Vec2(GameplayScreen.mouse_x * GameplayScreen.M_PER_PIXEL,GameplayScreen.mouse_y * GameplayScreen.M_PER_PIXEL),0f);
-        //sprite.layer().setRotation(body.getAngle());
-    }  //<< end
+    public void paint(Clock clock) {
+        if (!hasLoaded) return;
+        if (checkIndex == 1) {
+            sprite.layer().setTranslation(
+                    (GameplayScreen.mouse_x),
+                    GameplayScreen.mouse_y);
+            body.setTransform(new Vec2(GameplayScreen.mouse_x * GameplayScreen.M_PER_PIXEL, GameplayScreen.mouse_y * GameplayScreen.M_PER_PIXEL), 0f);
+            //sprite.layer().setRotation(body.getAngle());
+        }else if(checkIndex == 2){
+            sprite.layer().setTranslation(
+                    (GameplayScreen2.mouse_x),
+                    GameplayScreen2.mouse_y);
+            body.setTransform(new Vec2(GameplayScreen2.mouse_x * GameplayScreen2.M_PER_PIXEL, GameplayScreen2.mouse_y * GameplayScreen2.M_PER_PIXEL), 0f);
+            //sprite.layer().setRotation(body.getAngle());
+        }else if(checkIndex == 3){
+            sprite.layer().setTranslation(
+                    (GameplayScreen3.mouse_x),
+                    GameplayScreen3.mouse_y);
+            body.setTransform(new Vec2(GameplayScreen3.mouse_x * GameplayScreen3.M_PER_PIXEL, GameplayScreen3.mouse_y * GameplayScreen3.M_PER_PIXEL), 0f);
+            //sprite.layer().setRotation(body.getAngle());
+        }
+    }
 }

@@ -85,7 +85,7 @@ public class Ufo2 {
             }
 
             if(state == State.DIE){
-                System.out.println(spriteIndex);
+
                 if(spriteIndex == 11){
                     //sprite.layer().destroy();
                     //world.destroyBody(body);
@@ -108,19 +108,17 @@ public class Ufo2 {
         bodyDef.type = BodyType.DYNAMIC;
         bodyDef.position = new Vec2(200/26.666667f, 200/26.666667f);
         Body body = world.createBody(bodyDef);
-
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(30 * GameplayScreen.M_PER_PIXEL/2,
                 sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
 
         GameplayScreen.bodies.put(body, "UFO_2" );
-
-
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0f;
+        fixtureDef.filter.groupIndex = -1;
         //body.setBullet(true);
         body.createFixture(fixtureDef);
 

@@ -186,7 +186,7 @@ public class LevelSelect extends  Screen{
 
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
-                //ss.push(new GameplayScreen(ss));
+                ss.push(new GameplayScreen2(ss));
             }
 
 
@@ -208,7 +208,7 @@ public class LevelSelect extends  Screen{
 
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
-                //ss.push(new GameplayScreen(ss));
+                ss.push(new GameplayScreen2(ss));
             }
         });
 
@@ -231,7 +231,7 @@ public class LevelSelect extends  Screen{
 
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
-                //ss.push(new GameplayScreen(ss));
+                ss.push(new GameplayScreen3(ss));
             }
 
 
@@ -253,7 +253,7 @@ public class LevelSelect extends  Screen{
 
             @Override
             public void onMouseUp(Mouse.ButtonEvent event) {
-                //ss.push(new GameplayScreen(ss));
+                ss.push(new GameplayScreen3(ss));
             }
         });
 

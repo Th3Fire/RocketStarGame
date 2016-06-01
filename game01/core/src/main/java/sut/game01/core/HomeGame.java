@@ -23,7 +23,7 @@ public class HomeGame extends Screen{
 
 
     private final LevelSelect lvselect;
-    private final GameOver gameover;
+
     //private final TestScreen test;
     private final ScreenStack ss;
 
@@ -32,7 +32,7 @@ public class HomeGame extends Screen{
 
         this.ss = ss;
         this.lvselect = new LevelSelect(ss);
-        this.gameover = new GameOver(ss);
+
         //this.test = new TestScreen(ss);
 
         Image bgImage = assets().getImage("images/bgHome.png");

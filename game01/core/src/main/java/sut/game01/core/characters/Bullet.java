@@ -17,6 +17,8 @@ public class Bullet {
     private Sprite sprite;
     private int spriteIndex = 0;
     private boolean hasLoaded = false;
+    private int checkDestroy = 0;
+    private World world;
 
     public enum State {
         IDLE, Go, RIGHT
@@ -38,6 +40,7 @@ public class Bullet {
 
         this.x = _x; //<<
         this.y = _y; //<<
+        this.world = world;
 
         sprite = SpriteLoader.getSprite("images/bullet.json");
         sprite.addCallback(new Callback<Sprite>() {
@@ -68,6 +71,14 @@ public class Bullet {
     public void update(int delta){
         if(hasLoaded == false) return;
 
+        checkDestroy++;
+        if(checkDestroy > 33){
+            //sprite.layer().destroy();
+            world.destroyBody(body);
+            sprite.layer().setVisible(false);
+            //System.out.println("auto destroy bullet.");
+        }
+
         e += delta;
         if(e > 150) {
 
@@ -78,10 +89,13 @@ public class Bullet {
 
             }
             if(state == State.Go){
-                if (spriteIndex == 11) {
+                if (spriteIndex == 8) {
                     sprite.layer().destroy();
+                    world.destroyBody(body);
+                    sprite.layer().setVisible(false);
                 }
             }
+
 
             spriteIndex = offset + ((spriteIndex + 1)%4);
             sprite.setSprite(spriteIndex);
@@ -101,7 +115,7 @@ public class Bullet {
         GameplayScreen.bodiesB.put(body, "bullet");
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(60 * GameplayScreen.M_PER_PIXEL/2,
+        shape.setAsBox(10 * GameplayScreen.M_PER_PIXEL/2,
                 sprite.layer().height()*GameplayScreen.M_PER_PIXEL / 2);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
@@ -109,6 +123,7 @@ public class Bullet {
         fixtureDef.friction = 0.1f;
         fixtureDef.restitution = 0f;
         body.createFixture(fixtureDef);
+        body.setFixedRotation(true);
         body.setLinearDamping(0.2f);
         body.setTransform(new Vec2(x, y), 0f);
 
